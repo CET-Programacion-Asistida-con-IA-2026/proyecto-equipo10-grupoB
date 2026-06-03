@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>CeliaCheck</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fraunces:ital@1&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="cc-wrapper">
+
+  <!-- HERO -->
+  <header class="cc-hero">
+    <div class="cc-hero-bg">🌿</div>
+    <div class="cc-logo">Celia<em>Check</em></div>
+    <p class="cc-tagline">Descubrí si un alimento es apto para vos.</p>
+    <div class="cc-badge-row">
+      <span class="cc-badge">🌱 Vegano</span>
+      <span class="cc-badge">🥗 Vegetariano</span>
+      <span class="cc-badge">🌾 Celíaco</span>
+    </div>
+  </header>
+
+  <!-- ALIMENTACIÓN -->
+  <section class="cc-section">
+    <p class="cc-sec-title">¿Cuál es tu alimentación?</p>
+    <div class="cc-profile-grid">
+      <button class="cc-profile-btn" onclick="togglePerfil(this)">
+        <i>🌱</i> Vegano
+      </button>
+      <button class="cc-profile-btn" onclick="togglePerfil(this)">
+        <i>🥗</i> Vegetariano
+      </button>
+    </div>
+  </section>
+
+  <div class="cc-divider"></div>
+
+  <!-- ESCANEO -->
+  <section class="cc-section">
+    <p class="cc-sec-title">Escaneá tu alimento</p>
+    <div class="cc-scan-zone" id="scanZone" onclick="simularEscaneo()">
+      <div class="scan-bar"></div>
+      <span class="cc-scan-ico">📷</span>
+      <span class="cc-scan-label">ACTIVAR CÁMARA</span>
+      <span class="cc-scan-hint">Apuntá al código de barras</span>
+    </div>
+    <div class="cc-demos">
+      <button class="cc-demo-pill" onclick="cambiarSemaforo('verde')">✅ Simular apto</button>
+      <button class="cc-demo-pill" onclick="cambiarSemaforo('rojo')">❌ Simular no apto</button>
+    </div>
+  </section>
+
+  <div class="cc-divider"></div>
+
+  <!-- SEMÁFORO / RESULTADO -->
+  <section class="cc-section">
+    <p class="cc-sec-title">¿Podés consumirlo?</p>
+    <div class="cc-result">
+      <div class="cc-result-top">
+        <div class="cc-semaforo amarillo" id="semaforo">🟡</div>
+        <div>
+          <div class="cc-result-title" id="resultado">Esperando escaneo...</div>
+          <div class="cc-result-sub" id="resultado-sub">Escaneá un alimento para ver el resultado</div>
+        </div>
+      </div>
+      <div class="cc-ingredients">
+        <div class="cc-ing-label">Ingredientes</div>
+        <div class="cc-tags" id="tags">
+          <span class="cc-tag neutral">—</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cc-divider"></div>
+
+  <!-- MAPA -->
+  <section class="cc-section">
+    <p class="cc-sec-title">Encontrá lo que buscás</p>
+    <div class="cc-filter-row">
+      <button class="cc-filter" onclick="toggleFiltro(this)"><i>🌱</i> Vegano</button>
+      <button class="cc-filter" onclick="toggleFiltro(this)"><i>🥗</i> Vegetariano</button>
+      <button class="cc-filter" onclick="toggleFiltro(this)"><i>🌾</i> Celíaco</button>
+    </div>
+    <div class="cc-mapa">
+      <i>🗺️</i>
+      Mapa de locales
+      <small>Próximamente disponible</small>
+    </div>
+    <div class="cc-locales">
+      <div class="cc-local">
+        <div class="cc-local-ico">🥗</div>
+        <div>
+          <div class="cc-local-name">Verde Vida</div>
+          <div class="cc-local-meta">Palermo · 300m</div>
+        </div>
+        <span class="cc-local-badge">Vegano</span>
+      </div>
+      <div class="cc-local">
+        <div class="cc-local-ico">🌾</div>
+        <div>
+          <div class="cc-local-name">Sin TACC</div>
+          <div class="cc-local-meta">Belgrano · 600m</div>
+        </div>
+        <span class="cc-local-badge">Celíaco</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="cc-divider"></div>
+
+  <!-- QUIÉNES SOMOS -->
+  <section class="cc-section">
+    <p class="cc-sec-title">¿Quiénes somos?</p>
+    <p>Somos un equipo comprometido con hacer la alimentación consciente más accesible para todos. Próximamente más info sobre nosotras. 🌱</p>
+  </section>
+
+  <div class="cc-divider"></div>
+
+  <!-- FORMULARIO -->
+  <section class="cc-section" style="padding-bottom: 1.5rem">
+    <p class="cc-sec-title">Contanos tu experiencia</p>
+    <div class="cc-form">
+      <input type="text" placeholder="Tu nombre">
+      <textarea placeholder="Escribí tu experiencia acá..."></textarea>
+      <button class="cc-submit" onclick="enviarFormulario()">Enviar →</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="cc-footer">
+    <div class="cc-footer-logo">Celia<em>Check</em></div>
+    <div class="cc-footer-links">
+      <i title="Instagram">📸</i>
+      <i title="TikTok">🎵</i>
+      <i title="Email">✉️</i>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Toast -->
+<div class="cc-toast" id="toast">✅ ¡Comentario enviado!</div>
+
+<script src="script.js"></script>
+</body>
+</html>

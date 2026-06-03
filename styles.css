@@ -1,0 +1,542 @@
+/* =============================================
+   CeliaCheck — Estilos
+   ============================================= */
+
+/* Variables */
+:root {
+  --amarillo: #F5C842;
+  --borgona: #3D0A14;
+  --rojo-vivo: #D62E1A;
+  --verde-moo: #4CAF50;
+  --crema: #FFF8E7;
+}
+
+/* Reset & base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--crema);
+  color: var(--borgona);
+}
+
+/* ---- Layout ---- */
+.cc-wrapper {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.cc-section {
+  padding: 1.5rem 1.5rem 0;
+}
+
+.cc-divider {
+  height: 2px;
+  background: var(--borgona);
+  opacity: 0.08;
+  margin: 1.5rem 0 0;
+}
+
+/* ---- Header / Hero ---- */
+.cc-hero {
+  background: var(--amarillo);
+  padding: 2rem 1.5rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.cc-hero-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  font-size: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 1rem;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.cc-logo {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 42px;
+  color: var(--borgona);
+  line-height: 0.9;
+  letter-spacing: -1px;
+}
+
+.cc-logo em {
+  font-style: italic;
+  font-family: 'Fraunces', serif;
+  color: var(--rojo-vivo);
+  font-size: 44px;
+}
+
+.cc-tagline {
+  font-size: 13px;
+  color: var(--borgona);
+  opacity: 0.65;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.cc-badge-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.cc-badge {
+  background: var(--borgona);
+  color: var(--amarillo);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+}
+
+/* ---- Títulos de sección ---- */
+.cc-sec-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--borgona);
+  opacity: 0.5;
+  margin-bottom: 12px;
+}
+
+/* ---- Perfil alimentario ---- */
+.cc-profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.cc-profile-btn {
+  border: 2px solid var(--borgona);
+  border-radius: 12px;
+  background: transparent;
+  padding: 10px 12px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 12px;
+  color: var(--borgona);
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.cc-profile-btn i {
+  font-size: 18px;
+}
+
+.cc-profile-btn.active {
+  background: var(--borgona);
+  color: var(--amarillo);
+  border-color: var(--borgona);
+}
+
+/* ---- Zona de escaneo ---- */
+.cc-scan-zone {
+  border: 2.5px dashed var(--borgona);
+  border-radius: 16px;
+  background: transparent;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.cc-scan-zone:hover {
+  background: rgba(61, 10, 20, 0.04);
+}
+
+.cc-scan-zone.scanning {
+  background: var(--amarillo);
+  border-style: solid;
+}
+
+.cc-scan-ico {
+  font-size: 40px;
+  color: var(--borgona);
+  transition: color 0.2s;
+}
+
+.cc-scan-label {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 13px;
+  color: var(--borgona);
+  letter-spacing: 0.03em;
+}
+
+.cc-scan-hint {
+  font-size: 11px;
+  color: var(--borgona);
+  opacity: 0.5;
+}
+
+.scan-bar {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--rojo-vivo);
+  animation: scanMove 1.3s ease-in-out infinite;
+}
+
+.cc-scan-zone.scanning .scan-bar {
+  display: block;
+}
+
+@keyframes scanMove {
+  0%   { top: 0; }
+  50%  { top: 95%; }
+  100% { top: 0; }
+}
+
+/* ---- Pills de ejemplo ---- */
+.cc-demos {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.cc-demo-pill {
+  border: 2px solid var(--borgona);
+  border-radius: 999px;
+  background: transparent;
+  padding: 5px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--borgona);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.cc-demo-pill:hover {
+  background: var(--borgona);
+  color: var(--amarillo);
+}
+
+/* ---- Resultado / Semáforo ---- */
+.cc-result {
+  border: 2.5px solid var(--borgona);
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
+}
+
+.cc-result-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 1rem 1.25rem;
+}
+
+.cc-semaforo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2.5px solid var(--borgona);
+  background: #e2d9c8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  transition: background 0.4s;
+}
+
+.cc-semaforo.verde    { background: #5DCAA5; }
+.cc-semaforo.amarillo { background: var(--amarillo); }
+.cc-semaforo.rojo     { background: #E24B4A; }
+
+.cc-result-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 16px;
+  color: var(--borgona);
+  line-height: 1.2;
+}
+
+.cc-result-sub {
+  font-size: 12px;
+  color: var(--borgona);
+  opacity: 0.55;
+  margin-top: 2px;
+}
+
+.cc-ingredients {
+  border-top: 2px solid var(--borgona);
+  padding: 10px 1.25rem 14px;
+}
+
+.cc-ing-label {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--borgona);
+  opacity: 0.45;
+  margin-bottom: 8px;
+}
+
+.cc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cc-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 11px;
+  border-radius: 999px;
+  border: 1.5px solid;
+}
+
+.cc-tag.ok      { background: #E1F5EE; color: #0F6E56; border-color: #5DCAA5; }
+.cc-tag.warn    { background: #FFF3DC; color: #854F0B; border-color: #EF9F27; }
+.cc-tag.bad     { background: #FDEAEA; color: #A32D2D; border-color: #E24B4A; }
+.cc-tag.neutral { background: #F1EFE8; color: var(--borgona); border-color: #c8c3b3; opacity: 0.8; }
+
+/* ---- Filtros y locales ---- */
+.cc-filter-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cc-filter {
+  border: 2px solid var(--borgona);
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--borgona);
+  cursor: pointer;
+  background: transparent;
+  transition: background 0.15s, color 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  user-select: none;
+}
+
+.cc-filter.on {
+  background: var(--borgona);
+  color: var(--amarillo);
+}
+
+.cc-filter i { font-size: 14px; }
+
+.cc-mapa {
+  height: 160px;
+  border: 2.5px solid var(--borgona);
+  border-radius: 14px;
+  background: var(--amarillo);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--borgona);
+  font-size: 13px;
+  margin-top: 12px;
+  font-family: 'Archivo Black', sans-serif;
+  letter-spacing: 0.03em;
+}
+
+.cc-mapa i { font-size: 34px; }
+
+.cc-mapa small {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  opacity: 0.55;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.cc-locales {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.cc-local {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 2px solid var(--borgona);
+  border-radius: 12px;
+  padding: 10px 14px;
+  background: white;
+}
+
+.cc-local-ico {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--amarillo);
+  border: 2px solid var(--borgona);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--borgona);
+  flex-shrink: 0;
+}
+
+.cc-local-name {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 13px;
+  color: var(--borgona);
+}
+
+.cc-local-meta {
+  font-size: 11px;
+  color: var(--borgona);
+  opacity: 0.55;
+  margin-top: 1px;
+}
+
+.cc-local-badge {
+  margin-left: auto;
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--borgona);
+  color: var(--amarillo);
+  font-family: 'Archivo Black', sans-serif;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+/* ---- Formulario ---- */
+.cc-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cc-form input,
+.cc-form textarea {
+  border: 2px solid var(--borgona);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  background: white;
+  color: var(--borgona);
+  resize: none;
+  outline: none;
+}
+
+.cc-form input:focus,
+.cc-form textarea:focus {
+  border-color: var(--rojo-vivo);
+}
+
+.cc-form textarea { min-height: 80px; }
+
+.cc-submit {
+  align-self: flex-start;
+  background: var(--borgona);
+  color: var(--amarillo);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  padding: 11px 22px;
+  border: 2.5px solid var(--borgona);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  text-transform: uppercase;
+}
+
+.cc-submit:hover {
+  background: var(--rojo-vivo);
+  border-color: var(--rojo-vivo);
+  color: white;
+}
+
+/* ---- Toast ---- */
+.cc-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(60px);
+  background: var(--borgona);
+  color: var(--amarillo);
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.04em;
+  transition: transform 0.3s ease;
+  z-index: 100;
+  white-space: nowrap;
+}
+
+.cc-toast.show { transform: translateX(-50%) translateY(0); }
+.cc-toast i { font-size: 15px; }
+
+/* ---- Footer ---- */
+.cc-footer {
+  background: var(--borgona);
+  color: var(--amarillo);
+  padding: 1.25rem 1.5rem;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cc-footer-logo {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 18px;
+  letter-spacing: -0.5px;
+}
+
+.cc-footer-logo em {
+  font-style: italic;
+  font-family: 'Fraunces', serif;
+  color: var(--rojo-vivo);
+}
+
+.cc-footer-links {
+  display: flex;
+  gap: 14px;
+  font-size: 18px;
+}
+
+.cc-footer-links i {
+  color: var(--amarillo);
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.cc-footer-links i:hover { opacity: 1; }
