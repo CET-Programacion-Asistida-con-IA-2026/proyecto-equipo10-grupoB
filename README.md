@@ -79,7 +79,7 @@ Mapa con restaurantes, cafeterías y locales identificados por colores:
 
 ## 4 . Comparte tu experiencia 
 Creamos este espacio para que compartan sus historias, desafios, consejos o aprendisajes relacionados con la alimentación.
-*"juntos podemos crear un espacio de apoyo e informacion confiable para quienes buscan una alimentacion mas consciente e inclusiva
+*"juntos podemos crear un espacio de apoyo e informacion confiable para quienes buscan una alimentacion mas consciente e inclusiva"*
 
 ---
 
