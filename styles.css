@@ -113,6 +113,7 @@ body {
   margin-bottom: 12px;
 }
 
+
 /* ---- Perfil alimentario ---- */
 .cc-profile-grid {
   display: grid;
@@ -314,4 +315,9 @@ body {
   border: 1px solid #dc2626;
   background: #fef2f2;
 }
-/* ---- Filtros y locales ---- */
+
+/* ---- Info Perfil ---- */
+.perfil-info{
+    display:none;
+}
+

@@ -17,36 +17,96 @@
   </header>
 
   <!-- ALIMENTACIÓN -->
-  <section class="cc-section">
+
+    <section class="cc-section"></section>
+
     <p class="cc-sec-title">¿Cuál es tu alimentación?</p>
     <div class="cc-profile-grid">
-      <button class="cc-profile-btn" onclick="togglePerfil(this)">
-        <i></i> Diabético
+      <button onclick="mostrarSeccion('diabetico')">
+        <i>🩺 </i> Diabético
       </button>
-      <button class="cc-profile-btn" onclick="togglePerfil(this)">
-        <i>🥗</i> Celiaco
+      
+      
+      <button onclick="mostrarSeccion('celiaco')">
+        <i>🌾</i> Celiaco
       </button>
-      <button class="cc-profile-btn" onclick="togglePerfil(this)">
+      
+      <button onclick="mostrarSeccion('vegetariano')">
         <i>🥗</i> Vegetariano
       </button>
-      <button class="cc-profile-btn" onclick="togglePerfil(this)">
-        <i>🥗</i> Vegano
+      
+      <button onclick="mostrarSeccion('vegano')">
+        <i>🌱</i> Vegano
       </button>
+      
     </div>
   </section>
 
+
+  
   <div class="cc-divider"></div>
 
+  <section id="educativa">
+
+  <h2>📚 Sección educativa</h2>
+
+  <div id="diabetico" class="perfil-info">
+    <h3> Diabetes</h3>
+
+    <p><strong>❌ Qué alimentos evitar</strong></p>
+    <p>Pan, pastas y productos con gluten.</p>
+
+    <p><strong>🏷️ ¿Qué significa Sin TACC?</strong></p>
+    <p>Producto libre de trigo, avena, cebada y centeno.</p>
+
+    <p><strong>✅ Alternativas seguras</strong></p>
+    <p>Arroz, maíz y quinoa.</p>
+  </div>
+
+  <div id="celiaco" class="perfil-info">
+    <h3> Celiaco</h3>
+
+    <p><strong>❌ Qué alimentos evitar</strong></p>
+    <p>Azúcares refinados y harinas blancas.</p>
+
+    <p><strong>✅ Alternativas seguras</strong></p>
+    <p>Frutas, verduras y granos integrales.</p>
+  </div>
+
+  <div id="vegetariano" class="perfil-info">
+    <h3> Vegetariano</h3>
+
+    <p><strong>❌ Qué alimentos evitar</strong></p>
+    <p>Productos de origen animal.</p>
+
+    <p><strong>✅ Alternativas seguras</strong></p>
+    <p>Legumbres, frutas, verduras y nueces.</p>
+  </div>
+
+  <div id="vegano" class="perfil-info">
+    <h3> Vegano</h3>
+
+    <p><strong>❌ Qué alimentos evitar</strong></p>
+    <p>Carne, pescado y productos de origen animal.</p>
+
+    <p><strong>✅ Alternativas seguras</strong></p>
+    <p>Frutas, verduras, granos y productos lácteos (según el tipo de vegetarianismo).</p>
+  </div>
+
+</section>
+
+<div class="cc-divider"></div>
+
   <!-- verificador -->
-  <div class="cc-verificador">
+  <div class="cc-verificador"> 
   <p class="cc-sec-title">Verificador de alimentos</p>
   <p class="cc-sub">Seleccioná tu perfil y escribí un alimento.</p>
 
   <div class="cc-perfiles">
     <button class="cc-perfil-btn activo" onclick="selPerfil(this, 'vegano')">Vegano</button>
     <button class="cc-perfil-btn" onclick="selPerfil(this, 'vegetariano')">Vegetariano</button>
-    <button class="cc-perfil-btn" onclick="selPerfil(this, 'celiaco')">Celíaco</button>
     <button class="cc-perfil-btn" onclick="selPerfil(this, 'diabetico')">Diabético</button>
+    <button class="cc-perfil-btn" onclick="selPerfil(this, 'celiaco')">Celiaco</button>
   </div>
 
   <div class="cc-input-row">
@@ -56,8 +116,8 @@
   </div>
 
   <div class="cc-resultado" id="resultado">
-    <p class="cc-resultado-estado" id="resultado-estado"></p>
-    <p class="cc-resultado-texto" id="resultado-texto"></p>
+    <p id="resultado-estado"></p>
+    <p id="resultado-texto"></p>
   </div>
 </div>
 
@@ -115,17 +175,9 @@
     </div>
   </footer>
 
-</div>
-
 <!-- Toast -->
 <div class="cc-toast" id="toast">✅ ¡Comentario enviado!</div>
 
 <script src="script.js"></script>
-<script>
-  const db = { /* toda la base de datos */ };
-  let perfilActual = 'vegano';
-  function selPerfil(btn, perfil) { ... }
-  function verificar() { ... }
-</script>
 </body>
 </html>
