@@ -321,3 +321,16 @@ body {
     display:none;
 }
 
+/* ---- Responsivo: tablet y computadora ---- */
+@media (min-width: 768px) {
+  .cc-wrapper { max-width: 900px; }
+  .cc-logo { font-size: 60px; }
+  .cc-logo em { font-size: 62px; }
+  .cc-tagline { font-size: 16px; }
+  .cc-hero { padding: 3rem 2.5rem 2rem; }
+  .cc-profile-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .cc-mapa { flex-direction: row; }
+  .cc-mapa iframe { height: 300px; }
+  .cc-locales { flex-direction: row; }
+  .cc-local { flex: 1; }
+}
