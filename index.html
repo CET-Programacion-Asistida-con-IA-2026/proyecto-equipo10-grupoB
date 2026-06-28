@@ -125,45 +125,29 @@
   <div class="cc-divider"></div>
 
   <!-- MAPA -->
-  <section class="cc-section">
-    <p class="cc-sec-title">Encontrá lo que buscás</p>
-    <div class="cc-mapa">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52577.067550098305!2d-58.498696778320294!3d-34.551866000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb5f041dda9ab%3A0x70726b4847a62174!2sGaribaldi%20Restaurante!5e0!3m2!1ses-419!2sar!4v1781987186324!5m2!1ses-419!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    
-      
-    </div>
-    <div class="cc-locales">
-      <div class="cc-local">
-        <div class="cc-local-ico">🥗</div>
-        <div>
-          <div class="cc-local-name">Verde Vida</div>
-          <div class="cc-local-meta">Palermo · 300m</div>
-        </div>
-        <span class="cc-local-badge">Vegano</span>
-      </div>
-      <div class="cc-local">
-        <div class="cc-local-ico">🌾</div>
-        <div>
-          <div class="cc-local-name">Sin TACC</div>
-          <div class="cc-local-meta">Belgrano · 600m</div>
-        </div>
-        <span class="cc-local-badge">Celíaco</span>
-      </div>
-    </div>
-  </section>
-
-  <div class="cc-divider"></div>
-
-
-  <!-- FORMULARIO -->
-  <section class="cc-section" style="padding-bottom: 1.5rem">
-    <p class="cc-sec-title">Contanos tu experiencia</p>
-    <div class="cc-form">
-      <input type="text" placeholder="Tu nombre">
-      <textarea placeholder="Escribí tu experiencia acá..."></textarea>
-      <button class="cc-submit" onclick="enviarFormulario()">Enviar →</button>
-    </div>
-  </section>
+  <h1>🗺️ Mapa Inclusivo de Buenos Aires</h1> 
+  <p> Encontrá restaurantes, cafeterías y locales adaptados para distintas necesidades alimentarias. </p> 
+</header> 
+<section class="leyenda"> 
+  <h2>Leyenda</h2> <div class="item">
+     <span>🟦</span> 
+     <p>Celíacos</p> </div>
+      <div class="item"> <span>🟩</span> <p>Diabéticos</p> </div> 
+      <div class="item"> <span>🟨</span> <p>Veganos</p> </div> 
+      <div class="item"> <span>🟧</span> <p>Vegetarianos</p> </div>
+       <div class="item"> <span>⭐</span> <p>Multiaptos</p> </div> 
+      </section> <section class="filtros">
+       <button id="todos">Todos</button> 
+       <button id="celiacos">Celíacos</button>
+       <button id="diabeticos">Diabéticos</button> <button id="veganos">Veganos</button> 
+       <button id="vegetarianos">Vegetarianos</button> <button id="multiaptos">Multiaptos</button>
+       </section> <section class="buscador"> 
+        <input type="text" id="buscar" placeholder="Buscar local..."> </section>
+         <main> <!-- MAPA --> <div id="map"></div> 
+          <!-- INFORMACIÓN --> <aside id="info"> 
+            <h2>Información del Local</h2> 
+            <p> Seleccioná un marcador en el mapa para ver los detalles. </p> 
+          </aside> </main> <footer> <p> © 2026 - Proyecto Mapa Inclusivo BA </p> </footer> <!-- Leaflet JS --> <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script> <!-- JavaScript propio --> <script src="script.js"></script>
 
   <!-- FOOTER -->
   <footer class="cc-footer">
