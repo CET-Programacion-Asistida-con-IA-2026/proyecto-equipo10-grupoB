@@ -5,27 +5,33 @@
   <title>CeliaCheck</title>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fraunces:ital@1&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Leaflet.js para el mapa interactivo -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
-<div class="cc-wrapper">
+
+  <div class="contenedor">
 
   <!-- HERO -->
-  <header class="cc-hero">
-    <div class="cc-hero-bg">🌿</div>
-    <div class="cc-logo">Celia<em>Check</em></div>
-    <p class="cc-tagline">"Encontrá alimentos y lugares aptos para vos."</p>
+  <header class="hero">
+    <div class="hero-bg">🌿</div>
+    <div class="logo">Celia<em>Check</em></div>
+    <p class="tagline">"Encontrá alimentos y lugares aptos para vos."</p>
   </header>
 
   <!-- ALIMENTACIÓN -->
 
-    <section class="cc-section"></section>
+    <section class="alimentación">
 
     <p class="cc-sec-title">¿Cuál es tu alimentación?</p>
     <div class="cc-profile-grid">
       <button onclick="mostrarSeccion('diabetico')">
         <i>🩺 </i> Diabético
       </button>
-      
       
       <button onclick="mostrarSeccion('celiaco')">
         <i>🌾</i> Celiaco
@@ -38,17 +44,16 @@
       <button onclick="mostrarSeccion('vegano')">
         <i>🌱</i> Vegano
       </button>
-      
+    
     </div>
   </section>
 
 
   
-  <div class="cc-divider"></div>
+<div class="cc-divider"></div>
+    <!-- EDUCACIÓN -->
 
-  <section id="educativa">
-
-  <h2>📚 Sección educativa</h2>
+ <section class="educación">
 
   <div id="diabetico" class="perfil-info">
     <h3> Diabetes</h3>
@@ -84,7 +89,7 @@
   </div>
 
   <div id="vegano" class="perfil-info">
-    <h3> Vegano</h3>
+    <h3> Vegano </h3>
 
     <p><strong>❌ Qué alimentos evitar</strong></p>
     <p>Carne, pescado y productos de origen animal.</p>
@@ -98,70 +103,139 @@
 <div class="cc-divider"></div>
 
   <!-- verificador -->
-  <div class="cc-verificador"> 
+  <section class="verificador"> 
   <p class="cc-sec-title">Verificador de alimentos</p>
   <p class="cc-sub">Seleccioná tu perfil y escribí un alimento.</p>
 
-  <div class="cc-perfiles">
+  <!-- Perfil -->
+  <section class="perfiles">
     <button class="cc-perfil-btn activo" onclick="selPerfil(this, 'vegano')">Vegano</button>
     <button class="cc-perfil-btn" onclick="selPerfil(this, 'vegetariano')">Vegetariano</button>
     <button class="cc-perfil-btn" onclick="selPerfil(this, 'diabetico')">Diabético</button>
     <button class="cc-perfil-btn" onclick="selPerfil(this, 'celiaco')">Celiaco</button>
-  </div>
+  </section>
 
-  <div class="cc-input-row">
+  <section class="input-row">
     <input id="alimento-input" type="text" placeholder="Ej: arroz, pollo, leche..."
       onkeydown="if(event.key==='Enter') verificar()" />
     <button onclick="verificar()">Verificar</button>
-  </div>
-
-  <div class="cc-resultado" id="resultado">
+  </section>
+  <!-- Resultado -->
+  <section class="resultado" id="resultado">
     <p id="resultado-estado"></p>
     <p id="resultado-texto"></p>
-  </div>
-</div>
-
+  </section>
 
   <div class="cc-divider"></div>
 
-  <!-- MAPA -->
-  <h1>🗺️ Mapa Inclusivo de Buenos Aires</h1> 
-  <p> Encontrá restaurantes, cafeterías y locales adaptados para distintas necesidades alimentarias. </p> 
-</header> 
-<section class="leyenda"> 
-  <h2>Leyenda</h2> <div class="item">
-     <span>🟦</span> 
-     <p>Celíacos</p> </div>
-      <div class="item"> <span>🟩</span> <p>Diabéticos</p> </div> 
-      <div class="item"> <span>🟨</span> <p>Veganos</p> </div> 
-      <div class="item"> <span>🟧</span> <p>Vegetarianos</p> </div>
-       <div class="item"> <span>⭐</span> <p>Multiaptos</p> </div> 
-      </section> <section class="filtros">
-       <button id="todos">Todos</button> 
-       <button id="celiacos">Celíacos</button>
-       <button id="diabeticos">Diabéticos</button> <button id="veganos">Veganos</button> 
-       <button id="vegetarianos">Vegetarianos</button> <button id="multiaptos">Multiaptos</button>
-       </section> <section class="buscador"> 
-        <input type="text" id="buscar" placeholder="Buscar local..."> </section>
-         <main> <!-- MAPA --> <div id="map"></div> 
-          <!-- INFORMACIÓN --> <aside id="info"> 
-            <h2>Información del Local</h2> 
-            <p> Seleccioná un marcador en el mapa para ver los detalles. </p> 
-          </aside> </main> <footer> <p> © 2026 - Proyecto Mapa Inclusivo BA </p> </footer> <!-- Leaflet JS --> <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script> <!-- JavaScript propio --> <script src="script.js"></script>
+  
+  
+  <!-- ===== LEYENDA / FILTROS ===== -->
+  <section class="legend-bar" role="navigation" aria-label="Filtros por categoría">
+    <div class="legend-inner">
+      <span class="legend-label">Filtrar por:</span>
+      <div class="legend-filters" id="legend-filters">
 
-  <!-- FOOTER -->
-  <footer class="cc-footer">
-    <div class="cc-footer-logo">Celia<em>Check</em></div>
-    <div class="cc-footer-links">
-      <i title="Instagram">📸</i>
-      <i title="TikTok">🎵</i>
-      <i title="Email">✉️</i>
+        <button class="filter-btn active" data-category="all" aria-pressed="true">
+          <span class="filter-dot" style="background:#6C4FF7;"></span>
+          Todos
+        </button>
+
+        <button class="filter-btn" data-category="celiaco" aria-pressed="false">
+          <span class="filter-dot" style="background:#3B82F6;"></span>
+          Celíacos
+        </button>
+
+        <button class="filter-btn" data-category="diabetico" aria-pressed="false">
+          <span class="filter-dot" style="background:#22C55E;"></span>
+          Diabéticos
+        </button>
+
+        <button class="filter-btn" data-category="vegano" aria-pressed="false">
+          <span class="filter-dot" style="background:#EAB308;"></span>
+          Veganos
+        </button>
+
+        <button class="filter-btn" data-category="vegetariano" aria-pressed="false">
+          <span class="filter-dot" style="background:#F97316;"></span>
+          Vegetarianos
+        </button>
+
+        <button class="filter-btn" data-category="multiapto" aria-pressed="false">
+          <span class="filter-dot" style="background:#A855F7;"></span>
+          ⭐ Multiaptos
+        </button>
+
+      </div>
     </div>
+  </section>
+
+  <!-- ===== LAYOUT PRINCIPAL ===== -->
+  <main class="main-layout">
+
+    <!-- Panel izquierdo: lista de lugares -->
+    <aside class="places-panel" aria-label="Lista de lugares">
+      <div class="panel-header">
+        <h2 class="panel-title">Lugares encontrados</h2>
+        <span class="panel-count" id="panel-count">0 resultados</span>
+      </div>
+      <ul class="places-list" id="places-list" role="list">
+        <!-- Generado dinámicamente por JS -->
+      </ul>
+    </aside>
+
+    <!-- Mapa -->
+    <div class="map-wrapper">
+      <div id="map" role="region" aria-label="Mapa interactivo de lugares inclusivos"></div>
+
+      <!-- Indicador de carga -->
+      <div class="map-loading" id="map-loading" aria-live="polite">
+        <div class="spinner"></div>
+        <p>Cargando mapa…</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===== MODAL DE DETALLE ===== -->
+  <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-name" hidden>
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close" aria-label="Cerrar">✕</button>
+      <div class="modal-badge" id="modal-badge"></div>
+      <h3 class="modal-name" id="modal-name"></h3>
+      <p class="modal-type" id="modal-type"></p>
+      <p class="modal-address" id="modal-address">📍 <span id="modal-address-text"></span></p>
+      <div class="modal-tags" id="modal-tags"></div>
+      <div class="modal-info" id="modal-info"></div>
+      <a class="modal-cta" id="modal-cta" href="#" target="_blank" rel="noopener">Ver en Google Maps →</a>
+    </div>
+  </div>
+
+  <!-- ===== LEYENDA VISUAL (esquina del mapa) ===== -->
+  <div class="map-legend" id="map-legend" aria-label="Leyenda del mapa">
+    <p class="map-legend-title">Referencia</p>
+    <ul class="map-legend-list">
+      <li><span class="legend-circle" style="background:#3B82F6;"></span> Celíacos</li>
+      <li><span class="legend-circle" style="background:#22C55E;"></span> Diabéticos</li>
+      <li><span class="legend-circle" style="background:#EAB308;"></span> Veganos</li>
+      <li><span class="legend-circle" style="background:#F97316;"></span> Vegetarianos</li>
+      <li><span class="legend-circle" style="background:#A855F7;"></span> ⭐ Multiaptos</li>
+    </ul>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <p>Mapa Inclusivo · Hecho con ❤️ para toda la comunidad · <span id="footer-year"></span></p>
   </footer>
+
+  <!-- Script principal -->
+  <script src="app.js"></script>
+
 
 <!-- Toast -->
 <div class="cc-toast" id="toast">✅ ¡Comentario enviado!</div>
 
 <script src="script.js"></script>
+</main>
 </body>
 </html>
