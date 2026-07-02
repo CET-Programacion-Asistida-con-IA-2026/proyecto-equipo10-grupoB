@@ -113,7 +113,6 @@ body {
   margin-bottom: 12px;
 }
 
-
 /* ---- Perfil alimentario ---- */
 .cc-profile-grid {
   display: grid;
@@ -331,10 +330,9 @@ body {
   border: 2px solid var(--borgona);
 }
 
-
 /* ---- Info Perfil ---- */
-.perfil-info{
-    display:none;
+.perfil-info {
+  display: none;
 }
 
 /* ---- Responsivo: tablet y computadora ---- */
