@@ -28,77 +28,61 @@ function selPerfil(btn, perfil) {
   btn.classList.add("activo");
 }
 
-const alimentos = {
-  arroz: {
-    vegano: "apto",
-    vegetariano: "apto",
-    diabetico: "revisar",
-    celiaco: "apto",
-    motivo: "No contiene gluten."
-  },
-  pan: {
-    vegano: "apto",
-    vegetariano: "apto",
-    diabetico: "revisar",
-    celiaco: "no_apto",
-    motivo: "Contiene harina de trigo (gluten)."
-  },
-  leche: {
-    vegano: "no_apto",
-    vegetariano: "apto",
-    diabetico: "revisar",
-    celiaco: "apto",
-    motivo: "Es un producto de origen animal."
-  },
-  pollo: {
-    vegano: "no_apto",
-    vegetariano: "no_apto",
-    diabetico: "apto",
-    celiaco: "apto",
-    motivo: "Es carne."
-  },
-  quinoa: {
-    vegano: "apto",
-    vegetariano: "apto",
-    diabetico: "apto",
-    celiaco: "apto",
-    motivo: "Es naturalmente libre de gluten."
-  }
-}
 
-function verificar() {
-  let alimento = document.getElementById("alimento-input").value.toLowerCase().trim();
+
+// ---- Verificador con IA ----
+async function verificar() {
+  let alimento = document.getElementById("alimento-input").value.trim();
+  if (!alimento) return;
+ 
   let estado = document.getElementById("resultado-estado");
   let texto = document.getElementById("resultado-texto");
-  let resultado_div = document.getElementById("resultado");
-
-  let dato = alimentos[alimento];
-
-  resultado_div.style.display = "block";
-  resultado_div.className = "cc-resultado";
-
-  if (!dato) {
-    estado.textContent = "⚪ NO ENCONTRADO";
-    texto.textContent = "Ese alimento no está registrado en la base de datos.";
-    resultado_div.classList.add("amarillo");
-    return;
+  let div = document.getElementById("resultado");
+ 
+  div.style.display = "block";
+  div.className = "cc-resultado amarillo";
+  estado.textContent = "⏳ Consultando...";
+  texto.textContent = "Esperá un momento mientras analizamos el alimento.";
+ 
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 1000,
+        system: `Sos un asistente nutricional. Cuando te pregunten si un alimento es apto para un perfil alimentario, respondé SOLO en este formato JSON sin nada más:
+{"resultado": "APTO" o "NO APTO" o "REVISAR", "motivo": "explicación breve en una oración"}`,
+        messages: [{
+          role: "user",
+          content: `¿Es "${alimento}" apto para una persona ${perfilActual}?`
+        }]
+      })
+    });
+ 
+    const data = await response.json();
+    const json = JSON.parse(data.content[0].text);
+ 
+    div.className = "cc-resultado";
+    if (json.resultado === "APTO") {
+      estado.textContent = "🟢 APTO";
+      div.classList.add("verde");
+    } else if (json.resultado === "REVISAR") {
+      estado.textContent = "🟡 REVISAR";
+      div.classList.add("amarillo");
+    } else {
+      estado.textContent = "🔴 NO APTO";
+      div.classList.add("rojo");
+    }
+    texto.textContent = json.motivo;
+ 
+  } catch (err) {
+    div.className = "cc-resultado amarillo";
+    estado.textContent = "⚠️ Error";
+    texto.textContent = "No se pudo consultar. Revisá tu conexión.";
   }
-
-  let resultado = dato[perfilActual];
-
-  if (resultado === "apto") {
-    estado.textContent = "🟢 APTO";
-    resultado_div.classList.add("verde");
-  } else if (resultado === "revisar") {
-    estado.textContent = "🟡 REVISAR";
-    resultado_div.classList.add("amarillo");
-  } else if (resultado === "no_apto") {
-    estado.textContent = "🔴 NO APTO";
-    resultado_div.classList.add("rojo");
-  }
-
-  texto.textContent = dato.motivo;
 }
+ 
 
 // ---- Formulario ----
 function enviarFormulario() {
