@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>CeliaCheck</title>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fraunces:ital@1&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -17,110 +18,89 @@
   </header>
 
   <!-- ALIMENTACIÓN -->
-
-    <section class="cc-section"></section>
-
+  <section class="cc-section">
     <p class="cc-sec-title">¿Cuál es tu alimentación?</p>
     <div class="cc-profile-grid">
       <button onclick="mostrarSeccion('diabetico')">
-        <i>🩺 </i> Diabético
+        <i>🩺</i> Diabético
       </button>
-      
-      
       <button onclick="mostrarSeccion('celiaco')">
         <i>🌾</i> Celiaco
       </button>
-      
       <button onclick="mostrarSeccion('vegetariano')">
         <i>🥗</i> Vegetariano
       </button>
-      
       <button onclick="mostrarSeccion('vegano')">
         <i>🌱</i> Vegano
       </button>
-      
     </div>
   </section>
 
-
-  
   <div class="cc-divider"></div>
 
   <section id="educativa">
+    <h2>📚 Sección educativa</h2>
 
-  <h2>📚 Sección educativa</h2>
+    <div id="diabetico" class="perfil-info">
+      <h3>🩺 Diabetes</h3>
+      <p><strong>❌ Qué alimentos evitar</strong></p>
+      <p>Pan, pastas y productos con gluten.</p>
+      <p><strong>🏷️ ¿Qué significa Sin TACC?</strong></p>
+      <p>Producto libre de trigo, avena, cebada y centeno.</p>
+      <p><strong>✅ Alternativas seguras</strong></p>
+      <p>Arroz, maíz y quinoa.</p>
+    </div>
 
-  <div id="diabetico" class="perfil-info">
-    <h3> Diabetes</h3>
+    <div id="celiaco" class="perfil-info">
+      <h3>🌾 Celiaco</h3>
+      <p><strong>❌ Qué alimentos evitar</strong></p>
+      <p>Azúcares refinados y harinas blancas.</p>
+      <p><strong>✅ Alternativas seguras</strong></p>
+      <p>Frutas, verduras y granos integrales.</p>
+    </div>
 
-    <p><strong>❌ Qué alimentos evitar</strong></p>
-    <p>Pan, pastas y productos con gluten.</p>
+    <div id="vegetariano" class="perfil-info">
+      <h3>🥗 Vegetariano</h3>
+      <p><strong>❌ Qué alimentos evitar</strong></p>
+      <p>Productos de origen animal.</p>
+      <p><strong>✅ Alternativas seguras</strong></p>
+      <p>Legumbres, frutas, verduras y nueces.</p>
+    </div>
 
-    <p><strong>🏷️ ¿Qué significa Sin TACC?</strong></p>
-    <p>Producto libre de trigo, avena, cebada y centeno.</p>
+    <div id="vegano" class="perfil-info">
+      <h3>🌱 Vegano</h3>
+      <p><strong>❌ Qué alimentos evitar</strong></p>
+      <p>Carne, pescado y productos de origen animal.</p>
+      <p><strong>✅ Alternativas seguras</strong></p>
+      <p>Frutas, verduras, granos y productos lácteos (según el tipo de vegetarianismo).</p>
+    </div>
+  </section>
 
-    <p><strong>✅ Alternativas seguras</strong></p>
-    <p>Arroz, maíz y quinoa.</p>
+  <div class="cc-divider"></div>
+
+  <!-- VERIFICADOR -->
+  <div class="cc-verificador">
+    <p class="cc-sec-title">Verificador de alimentos</p>
+    <p class="cc-sub">Seleccioná tu perfil y escribí un alimento.</p>
+
+    <div class="cc-perfiles">
+      <button class="cc-perfil-btn activo" onclick="selPerfil(this, 'vegano')">Vegano</button>
+      <button class="cc-perfil-btn" onclick="selPerfil(this, 'vegetariano')">Vegetariano</button>
+      <button class="cc-perfil-btn" onclick="selPerfil(this, 'diabetico')">Diabético</button>
+      <button class="cc-perfil-btn" onclick="selPerfil(this, 'celiaco')">Celiaco</button>
+    </div>
+
+    <div class="cc-input-row">
+      <input id="alimento-input" type="text" placeholder="Ej: arroz, pollo, leche..."
+        onkeydown="if(event.key==='Enter') verificar()" />
+      <button onclick="verificar()">Verificar</button>
+    </div>
+
+    <div class="cc-resultado" id="resultado">
+      <p id="resultado-estado"></p>
+      <p id="resultado-texto"></p>
+    </div>
   </div>
-
-  <div id="celiaco" class="perfil-info">
-    <h3> Celiaco</h3>
-
-    <p><strong>❌ Qué alimentos evitar</strong></p>
-    <p>Azúcares refinados y harinas blancas.</p>
-
-    <p><strong>✅ Alternativas seguras</strong></p>
-    <p>Frutas, verduras y granos integrales.</p>
-  </div>
-
-  <div id="vegetariano" class="perfil-info">
-    <h3> Vegetariano</h3>
-
-    <p><strong>❌ Qué alimentos evitar</strong></p>
-    <p>Productos de origen animal.</p>
-
-    <p><strong>✅ Alternativas seguras</strong></p>
-    <p>Legumbres, frutas, verduras y nueces.</p>
-  </div>
-
-  <div id="vegano" class="perfil-info">
-    <h3> Vegano</h3>
-
-    <p><strong>❌ Qué alimentos evitar</strong></p>
-    <p>Carne, pescado y productos de origen animal.</p>
-
-    <p><strong>✅ Alternativas seguras</strong></p>
-    <p>Frutas, verduras, granos y productos lácteos (según el tipo de vegetarianismo).</p>
-  </div>
-
-</section>
-
-<div class="cc-divider"></div>
-
-  <!-- verificador -->
-  <div class="cc-verificador"> 
-  <p class="cc-sec-title">Verificador de alimentos</p>
-  <p class="cc-sub">Seleccioná tu perfil y escribí un alimento.</p>
-
-  <div class="cc-perfiles">
-    <button class="cc-perfil-btn activo" onclick="selPerfil(this, 'vegano')">Vegano</button>
-    <button class="cc-perfil-btn" onclick="selPerfil(this, 'vegetariano')">Vegetariano</button>
-    <button class="cc-perfil-btn" onclick="selPerfil(this, 'diabetico')">Diabético</button>
-    <button class="cc-perfil-btn" onclick="selPerfil(this, 'celiaco')">Celiaco</button>
-  </div>
-
-  <div class="cc-input-row">
-    <input id="alimento-input" type="text" placeholder="Ej: arroz, pollo, leche..."
-      onkeydown="if(event.key==='Enter') verificar()" />
-    <button onclick="verificar()">Verificar</button>
-  </div>
-
-  <div class="cc-resultado" id="resultado">
-    <p id="resultado-estado"></p>
-    <p id="resultado-texto"></p>
-  </div>
-</div>
-
 
   <div class="cc-divider"></div>
 
@@ -128,12 +108,10 @@
   <section class="cc-section">
     <p class="cc-sec-title">Encontrá lo que buscás</p>
     <div class="cc-mapa">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6564.879366293189!2d-58.5662010248824!3d-34.6435973596044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc7c982b64147%3A0xe13a877bcf364586!2sVERT%20Plantas%2BDeco%2BCaf%C3%A9!5e0!3m2!1ses-419!2sar!4v1782332700865!5m2!1ses-419!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6564.879366293189!2d-58.5662010248824!3d-34.6435973596044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc7c982b64147%3A0xe13a877bcf364586!2sVERT%20Plantas%2BDeco%2BCaf%C3%A9!5e0!3m2!1ses-419!2sar!4v1782332700865!5m2!1ses-419!2sar" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52577.067550098305!2d-58.498696778320294!3d-34.551866000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb5f041dda9ab%3A0x70726b4847a62174!2sGaribaldi%20Restaurante!5e0!3m2!1ses-419!2sar!4v1781987186324!5m2!1ses-419!2sar" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      
-    
-      
     </div>
+    <div id="map" style="height: 400px; border-radius: 12px; margin: 0 1.5rem 1.5rem;"></div>
     <div class="cc-locales">
       <div class="cc-local">
         <div class="cc-local-ico">🥗</div>
@@ -156,7 +134,6 @@
 
   <div class="cc-divider"></div>
 
-
   <!-- FORMULARIO -->
   <section class="cc-section" style="padding-bottom: 1.5rem">
     <p class="cc-sec-title">Contanos tu experiencia</p>
@@ -177,9 +154,12 @@
     </div>
   </footer>
 
+</div>
+
 <!-- Toast -->
 <div class="cc-toast" id="toast">✅ ¡Comentario enviado!</div>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
