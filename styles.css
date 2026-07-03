@@ -48,7 +48,7 @@ body {
 /* ---- Header / Hero ---- */
 .cc-hero {
   background: var(--amarillo);
-  padding: 2rem 1.5rem 1.5rem;
+  padding: 4rem 2rem 4rem;
   position: relative;
   overflow: hidden;
 }
@@ -68,7 +68,7 @@ body {
 
 .cc-logo {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 42px;
+  font-size: 62px;
   color: var(--borgona);
   line-height: 0.9;
   letter-spacing: -1px;
@@ -78,14 +78,14 @@ body {
   font-style: italic;
   font-family: 'Fraunces', serif;
   color: var(--rojo-vivo);
-  font-size: 44px;
+  font-size: 54px;
 }
 
 .cc-tagline {
   font-size: 13px;
   color: var(--borgona);
   opacity: 0.65;
-  margin-top: 6px;
+  margin-top: 16px;
   font-weight: 500;
 }
 
@@ -109,7 +109,7 @@ body {
 /* ---- Títulos de sección ---- */
 .cc-sec-title {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 13px;
+  font-size: 20px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--borgona);
@@ -241,7 +241,7 @@ body {
   font-weight: 500;
   color: var(--borgona);
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: --background 0.15s, color 0.15s;
 }
 
 .cc-demo-pill:hover {
@@ -350,13 +350,16 @@ body {
 /* ---- Responsivo: tablet y computadora ---- */
 @media (min-width: 768px) {
   .cc-wrapper { max-width: 1200px; }
-  .cc-logo { font-size: 60px; }
-  .cc-logo em { font-size: 62px; }
-  .cc-tagline { font-size: 16px; }
-  .cc-hero { padding: 3rem 2.5rem 2rem; }
+  .cc-logo { font-size: 80px; }
+  .cc-logo em { font-size: 82px; }
+  .cc-tagline { font-size: 25px; }
+  .cc-hero { padding: 5rem 2.5rem 5rem; }
 .cc-profile-grid { grid-template-columns: 1fr 1fr 1fr; }
   .cc-mapa { flex-direction: row; }
   .cc-mapa iframe { height: 300px; }
   .cc-locales { flex-direction: row; }
   .cc-local { flex: 1; }
+}
+#educativa h2 {
+  font-size: 18px;
 }
