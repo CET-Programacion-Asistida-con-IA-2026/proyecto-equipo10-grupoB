@@ -15,43 +15,30 @@
     <div class="cc-logo">Celia<em>Check</em></div>
     <p class="cc-tagline">"Encontrá alimentos y lugares aptos para vos."</p>
   </header>
-  
-<div class="cc-wrapper">
 
-  <!-- HERO -->
+<div class="cc-wrapper">
  
+  <!-- HERO -->
 
   <!-- ALIMENTACIÓN -->
   <section class="cc-section">
     <p class="cc-sec-title">¿Cuál es tu alimentación?</p>
-    <div class="cc-profile-grid">
+   <div class="cc-profile-grid">
     
-      <button onclick="mostrarSeccion('celiaco')">
+      <button class="cc-profile-btn" onclick="mostrarSeccion('celiaco')">
         <i>🌾</i> Celiaco
       </button>
-      <button onclick="mostrarSeccion('vegetariano')">
+      <button class="cc-profile-btn" onclick="mostrarSeccion('vegetariano')">
         <i>🥗</i> Vegetariano
       </button>
-      <button onclick="mostrarSeccion('vegano')">
+      <button class="cc-profile-btn" onclick="mostrarSeccion('vegano')">
         <i>🌱</i> Vegano
       </button>
     </div>
   </section>
 
-  <div class="cc-divider"></div>
-
-  <section id="educativa">
+  <section id="educativa" class="cc-section"></section>
     <h2>📚 Sección educativa</h2>
-
-    <div id="diabetico" class="perfil-info">
-      <h3>🩺 Diabetes</h3>
-      <p><strong>❌ Qué alimentos evitar</strong></p>
-      <p>Pan, pastas y productos con gluten.</p>
-      <p><strong>🏷️ ¿Qué significa Sin TACC?</strong></p>
-      <p>Producto libre de trigo, avena, cebada y centeno.</p>
-      <p><strong>✅ Alternativas seguras</strong></p>
-      <p>Arroz, maíz y quinoa.</p>
-    </div>
 
     <div id="celiaco" class="perfil-info">
       <h3>🌾 Celiaco</h3>
@@ -78,8 +65,6 @@
     </div>
   </section>
 
-  <div class="cc-divider"></div>
-
   <!-- VERIFICADOR -->
   <div class="cc-verificador">
     <p class="cc-sec-title">Verificador de alimentos</p>
@@ -88,7 +73,7 @@
     <div class="cc-perfiles">
       <button class="cc-perfil-btn activo" onclick="selPerfil(this, 'vegano')">Vegano</button>
       <button class="cc-perfil-btn" onclick="selPerfil(this, 'vegetariano')">Vegetariano</button>
-      <button class="cc-perfil-btn" onclick="selPerfil(this, 'diabetico')">Diabético</button>
+
       <button class="cc-perfil-btn" onclick="selPerfil(this, 'celiaco')">Celiaco</button>
     </div>
 
@@ -103,8 +88,6 @@
       <p id="resultado-texto"></p>
     </div>
   </div>
-
-  <div class="cc-divider"></div>
 
   <!-- MAPA -->
   <section class="cc-section">
