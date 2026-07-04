@@ -120,11 +120,10 @@ body {
 /* ---- Perfil alimentario ---- */
 .cc-profile-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
- gap: 10rem;
+  grid-template-columns: 1fr;
+  gap: 1rem;
   justify-content: center;
 }
-
 .cc-profile-btn {
   aspect-ratio: 1 / 1;
   border: none;
@@ -405,4 +404,58 @@ body {
   font-family: 'Archivo Black', sans-serif;
   font-size: 13px;
   cursor: pointer;
+}
+¡Buenísimo! 🎉 Ahora sí, vamos con el CSS para que se muestre solo uno de los dos según el dispositivo.
+Agregá esto al final de tu styles.css:
+css/* ---- Escáner de código de barras ---- */
+
+/* Por defecto (mobile): mostrar escáner, esconder input manual */
+.cc-scan-mobile {
+  display: block;
+}
+
+.cc-scan-desktop {
+  display: none;
+}
+
+.cc-scan-btn {
+  width: 100%;
+  border: 2.5px dashed var(--borgona);
+  border-radius: 16px;
+  background: transparent;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 14px;
+  color: var(--borgona);
+}
+
+.cc-scan-btn i {
+  font-size: 40px;
+  font-style: normal;
+}
+
+/* En pantallas grandes: esconder escáner, mostrar input manual */
+@media (min-width: 768px) {
+  .cc-scan-mobile {
+    display: none;
+  }
+
+  .cc-scan-desktop {
+    display: flex;
+    gap: 8px;
+  }
+
+  .cc-scan-desktop input {
+    flex: 1;
+    padding: 0 12px;
+    height: 42px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+  }
 }

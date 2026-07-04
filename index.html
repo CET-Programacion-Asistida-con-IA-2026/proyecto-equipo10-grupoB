@@ -37,56 +37,32 @@
     </div>
   </section>
 
- <section id="educativa" class="cc-section">
-    <h2>📚 Sección educativa</h2>
-    <div id="celiaco" class="perfil-info">
-      <h3>🌾 Celiaco</h3>
-      <p><strong>❌ Qué alimentos evitar</strong></p>
-      <p>Azúcares refinados y harinas blancas.</p>
-      <p><strong>✅ Alternativas seguras</strong></p>
-      <p>Frutas, verduras y granos integrales.</p>
-    </div>
 
-    <div id="vegetariano" class="perfil-info">
-      <h3>🥗 Vegetariano</h3>
-      <p><strong>❌ Qué alimentos evitar</strong></p>
-      <p>Productos de origen animal.</p>
-      <p><strong>✅ Alternativas seguras</strong></p>
-      <p>Legumbres, frutas, verduras y nueces.</p>
-    </div>
 
-    <div id="vegano" class="perfil-info">
-      <h3>🌱 Vegano</h3>
-      <p><strong>❌ Qué alimentos evitar</strong></p>
-      <p>Carne, pescado y productos de origen animal.</p>
-      <p><strong>✅ Alternativas seguras</strong></p>
-      <p>Frutas, verduras, granos y productos lácteos (según el tipo de vegetarianismo).</p>
-    </div>
-  </section>
+  
 
   <!-- VERIFICADOR -->
   <div class="cc-verificador">
     <p class="cc-sec-title">Verificador de alimentos</p>
     <p class="cc-sub">Seleccioná tu perfil y escribí un alimento.</p>
-
-    <div class="cc-perfiles">
-      <button class="cc-perfil-btn activo" onclick="selPerfil(this, 'vegano')">Vegano</button>
-      <button class="cc-perfil-btn" onclick="selPerfil(this, 'vegetariano')">Vegetariano</button>
-
-      <button class="cc-perfil-btn" onclick="selPerfil(this, 'celiaco')">Celiaco</button>
+ <!-- Escáner para celular -->
+    <div class="cc-scan-mobile">
+      <button class="cc-scan-btn" onclick="alert('Acá vamos a abrir la cámara')">
+        <i>📷</i>
+        <span>Escanear código de barras</span>
+      </button>
     </div>
 
-    <div class="cc-input-row">
-      <input id="alimento-input" type="text" placeholder="Ej: arroz, pollo, leche..."
-        onkeydown="if(event.key==='Enter') verificar()" />
-      <button onclick="verificar()">Verificar</button>
-    </div>
-
-    <div class="cc-resultado" id="resultado">
-      <p id="resultado-estado"></p>
-      <p id="resultado-texto"></p>
+    <!-- Input manual para compu -->
+    <div class="cc-scan-desktop">
+      <input type="text" id="codigo-barras" placeholder="Escribí el código de barras del producto...">
+      <button class="cc-submit" onclick="alert('Acá vamos a buscar el producto')">Buscar</button>
     </div>
   </div>
+    
+    
+
+  
 
   <!-- MAPA -->
   <section class="cc-section">
