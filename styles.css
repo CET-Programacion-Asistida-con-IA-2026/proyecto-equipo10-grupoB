@@ -459,3 +459,18 @@ css/* ---- Escáner de código de barras ---- */
     font-size: 15px;
   }
 }
+/* ---- Flash de resultado en pantalla completa ---- */
+.cc-flash-verde {
+  background-color: #86efac !important;
+  transition: background-color 0.3s;
+}
+
+.cc-flash-rojo {
+  background-color: #fca5a5 !important;
+  transition: background-color 0.3s;
+}
+
+.cc-flash-amarillo {
+  background-color: #fde68a !important;
+  transition: background-color 0.3s;
+}
