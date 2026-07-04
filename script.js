@@ -90,6 +90,38 @@ function enviarFormulario() {
   toast.classList.add('show')
   setTimeout(() => toast.classList.remove('show'), 3000)
 }
+async function buscarProductoPorCodigo(codigo) {
+  try {
+    const response = await fetch(`https://world.openfoodfacts.org/api/v2/product/${codigo}.json`);
+    const data = await response.json();
+
+    if (data.status === 0) {
+      return null;
+    }
+
+    return {
+      nombre: data.product.product_name || "Producto sin nombre",
+      ingredientes: data.product.ingredients_text || "Sin información de ingredientes"
+    };
+  } catch (err) {
+    console.error("Error buscando producto:", err);
+    return null;
+  }
+}
+
+async function buscarPorInput() {
+  const codigo = document.getElementById("codigo-barras").value.trim();
+  if (!codigo) return;
+
+  const producto = await buscarProductoPorCodigo(codigo);
+
+  if (!producto) {
+    alert("No se encontró ningún producto con ese código.");
+    return;
+  }
+
+  alert(`Producto: ${producto.nombre}\nIngredientes: ${producto.ingredientes}`);
+}
 
 /* ============================================================
    MAPA INCLUSIVO
