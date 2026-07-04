@@ -363,3 +363,46 @@ body {
 #educativa h2 {
   font-size: 18px;
 }
+/* ---- Formulario ---- */
+.cc-form {
+  border: 2px solid var(--amarillo);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  background: white;
+}
+
+.cc-form input,
+.cc-form textarea {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--borgona);
+  padding: 0.75rem 0;
+}
+
+.cc-form input {
+  border-bottom: 2px solid var(--amarillo);
+}
+
+.cc-form textarea {
+  min-height: 100px;
+  resize: vertical;
+  margin-top: 0.5rem;
+}
+
+.cc-submit {
+  margin-top: 1rem;
+  align-self: flex-end;
+  border: none;
+  border-radius: 999px;
+  background: var(--borgona);
+  color: var(--amarillo);
+  padding: 10px 20px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+}
