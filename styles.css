@@ -5,6 +5,7 @@
 /* Variables */
 :root {
   --amarillo: #F5C842;
+  --amarillo-claro: #FBE29B;
   --borgona: #3D0A14;
   --rojo-vivo: #D62E1A;
   --verde-moo: #4CAF50;
@@ -31,20 +32,23 @@ body {
 }
 
 .cc-section {
-  padding: 1.5rem 1.5rem 0;
+  padding: 6rem 1.5rem 1.5rem;
 }
 
 .cc-divider {
   height: 2px;
   background: var(--borgona);
   opacity: 0.08;
-  margin: 1.5rem 0 0;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
 }
 
 /* ---- Header / Hero ---- */
 .cc-hero {
   background: var(--amarillo);
-  padding: 2rem 1.5rem 1.5rem;
+  padding: 4rem 2rem 4rem;
   position: relative;
   overflow: hidden;
 }
@@ -64,7 +68,7 @@ body {
 
 .cc-logo {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 42px;
+  font-size: 62px;
   color: var(--borgona);
   line-height: 0.9;
   letter-spacing: -1px;
@@ -74,14 +78,14 @@ body {
   font-style: italic;
   font-family: 'Fraunces', serif;
   color: var(--rojo-vivo);
-  font-size: 44px;
+  font-size: 54px;
 }
 
 .cc-tagline {
   font-size: 13px;
   color: var(--borgona);
   opacity: 0.65;
-  margin-top: 6px;
+  margin-top: 16px;
   font-weight: 500;
 }
 
@@ -105,36 +109,43 @@ body {
 /* ---- Títulos de sección ---- */
 .cc-sec-title {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 13px;
+  font-size: 20px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--borgona);
   opacity: 0.5;
-  margin-bottom: 12px;
+  margin-bottom: 24px;
 }
 
 /* ---- Perfil alimentario ---- */
 .cc-profile-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  justify-content: center;
 }
-
 .cc-profile-btn {
-  border: 2px solid var(--borgona);
-  border-radius: 12px;
-  background: transparent;
-  padding: 10px 12px;
+  aspect-ratio: 1 / 1;
+  border: none;
+  border-radius: 24px;
+  background: var(--amarillo-claro);
   font-family: 'Archivo Black', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--borgona);
   cursor: pointer;
-  text-align: left;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   transition: all 0.15s;
   letter-spacing: 0.02em;
+  max-width: 350px;
+  width: 100%;
+}
+.cc-profile-btn i {
+  font-size: 32px;
+  font-style: normal;
 }
 
 .cc-profile-btn i {
@@ -229,7 +240,7 @@ body {
   font-weight: 500;
   color: var(--borgona);
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: --background 0.15s, color 0.15s;
 }
 
 .cc-demo-pill:hover {
@@ -337,12 +348,12 @@ body {
 
 /* ---- Responsivo: tablet y computadora ---- */
 @media (min-width: 768px) {
-  .cc-wrapper { max-width: 900px; }
-  .cc-logo { font-size: 60px; }
-  .cc-logo em { font-size: 62px; }
-  .cc-tagline { font-size: 16px; }
-  .cc-hero { padding: 3rem 2.5rem 2rem; }
-  .cc-profile-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .cc-wrapper { max-width: 1200px; }
+  .cc-logo { font-size: 80px; }
+  .cc-logo em { font-size: 82px; }
+  .cc-tagline { font-size: 25px; }
+  .cc-hero { padding: 5rem 2.5rem 5rem; }
+.cc-profile-grid { grid-template-columns: 1fr 1fr 1fr; }
   .cc-mapa { flex-direction: row; }
   .cc-mapa iframe { height: 300px; }
   .cc-locales { flex-direction: row; }

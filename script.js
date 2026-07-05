@@ -90,6 +90,85 @@ function enviarFormulario() {
   toast.classList.add('show')
   setTimeout(() => toast.classList.remove('show'), 3000)
 }
+async function buscarProductoPorCodigo(codigo) {
+  try {
+    const response = await fetch(`https://world.openfoodfacts.org/api/v2/product/${codigo}.json`);
+    const data = await response.json();
+
+    if (data.status === 0) {
+      return null;
+    }
+
+    return {
+      nombre: data.product.product_name || "Producto sin nombre",
+      ingredientes: data.product.ingredients_text || "Sin información de ingredientes"
+    };
+  } catch (err) {
+    console.error("Error buscando producto:", err);
+    return null;
+  }
+}
+
+async function buscarPorInput() {
+  const codigo = document.getElementById("codigo-barras").value.trim();
+  if (!codigo) return;
+
+  const producto = await buscarProductoPorCodigo(codigo);
+
+  if (!producto) {
+    alert("No se encontró ningún producto con ese código.");
+    return;
+  }
+
+  await evaluarProducto(producto);
+}
+
+async function evaluarProducto(producto) {
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 1000,
+        system: `Sos un asistente nutricional. Cuando te den el nombre e ingredientes de un producto, respondé SOLO en este formato JSON sin nada más:
+{"resultado": "APTO" o "NO APTO" o "REVISAR", "motivo": "explicación breve en una oración"}`,
+        messages: [{
+          role: "user",
+          content: `Producto: "${producto.nombre}". Ingredientes: "${producto.ingredientes}". ¿Es apto para una persona ${perfilActual}?`
+        }]
+      })
+    });
+
+    const data = await response.json();
+    const json = JSON.parse(data.content[0].text);
+
+    mostrarResultadoPantalla(json.resultado, producto.nombre, json.motivo);
+
+  } catch (err) {
+    console.error("Error evaluando producto:", err);
+    alert("No se pudo evaluar el producto. Revisá tu conexión.");
+  }
+}
+
+function mostrarResultadoPantalla(resultado, nombre, motivo) {
+  const body = document.body;
+  body.classList.remove("cc-flash-verde", "cc-flash-rojo", "cc-flash-amarillo");
+
+  if (resultado === "APTO") {
+    body.classList.add("cc-flash-verde");
+  } else if (resultado === "REVISAR") {
+    body.classList.add("cc-flash-amarillo");
+  } else {
+    body.classList.add("cc-flash-rojo");
+  }
+
+  alert(`${nombre}\n${resultado}\n${motivo}`);
+
+  setTimeout(() => {
+    body.classList.remove("cc-flash-verde", "cc-flash-rojo", "cc-flash-amarillo");
+  }, 3000);
+}
 
 /* ============================================================
    MAPA INCLUSIVO
