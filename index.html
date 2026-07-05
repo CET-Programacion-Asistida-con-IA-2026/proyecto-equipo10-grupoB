@@ -55,7 +55,8 @@
 
     <!-- Input manual para compu -->
     <div class="cc-scan-desktop">
-  <input type="text" id="codigo-barras" placeholder="Escribí el código de barras del producto...">
+  <input type="text" id="codigo-barras" placeholder="Escribí el código de barras del producto..."
+  onkeydown="if(event.key==='Enter') buscarPorInput()">
   <button class="cc-submit" onclick="buscarPorInput()">Buscar</button>
 </div>
   </div>

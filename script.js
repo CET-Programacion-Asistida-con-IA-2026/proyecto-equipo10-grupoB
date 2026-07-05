@@ -18,7 +18,7 @@ function mostrarSeccion(id) {
 }
 
 // ---- Semáforo ----
-let perfilActual = "vegano";
+let perfilActual = null;
 
 function selPerfil(btn, perfil) {
   perfilActual = perfil;
@@ -188,6 +188,11 @@ function evaluarIngredientes(textoIngredientes, perfil) {
 }
 
 async function evaluarProducto(producto) {
+  if (!perfilActual) {
+    alert("Antes de buscar, seleccioná tu perfil alimentario (Celiaco, Vegetariano o Vegano) arriba en '¿Cuál es tu alimentación?'.");
+    return;
+  }
+
   if (!producto.ingredientes || producto.ingredientes === "Sin información de ingredientes") {
     alert(`${producto.nombre}\nNo hay información de ingredientes disponible para evaluar este producto.`);
     return;
