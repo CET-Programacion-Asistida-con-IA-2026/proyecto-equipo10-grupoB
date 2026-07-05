@@ -93,7 +93,7 @@ El diseño visual de CeliaCheck está inspirado en:
 | 🟩 Verde claro | `#A5D6A7` | Acentos, bordes |
 | 🟨 Amarillo | `#FFD600` | Resultado Revisar, sección escáner |
 | 🟧 Naranja | `#FF7043` | Vegetariano, alertas |
-| 🟦 Azul suave | `#42A5F5` | Celíaco en mapa |
+| 🟦 Azul suave | `#FFD600` | Celíaco en mapa |
 | ⬜ Beige claro | `#F5F5DC` | Fondo hero y perfil |
 | ⬜ Blanco | `#FFFFFF` | Fondos de tarjetas |
 | ⬛ Gris oscuro | `#424242` | Texto principal |
