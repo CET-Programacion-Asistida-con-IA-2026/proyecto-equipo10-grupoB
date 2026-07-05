@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+<link rel="icon" href="data:image/svg+xml,svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
   <meta charset="UTF-8">
   <title>CeliaCheck</title>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fraunces:ital@1&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -24,14 +24,14 @@
   <section class="cc-section">
     <p class="cc-sec-title">¿Cuál es tu alimentación?</p>
    <div class="cc-profile-grid">
-    
-      <button class="cc-profile-btn" onclick="mostrarSeccion('celiaco')">
+  
+     <button class="cc-profile-btn" onclick="elegirPerfil(this, 'celiaco')">
         <i>🌾</i> Celiaco
       </button>
-      <button class="cc-profile-btn" onclick="mostrarSeccion('vegetariano')">
+      <button class="cc-profile-btn" onclick="elegirPerfil(this, 'vegetariano')">
         <i>🥗</i> Vegetariano
       </button>
-      <button class="cc-profile-btn" onclick="mostrarSeccion('vegano')">
+      <button class="cc-profile-btn" onclick="elegirPerfil(this, 'vegano')">
         <i>🌱</i> Vegano
       </button>
     </div>
@@ -115,9 +115,6 @@
   </footer>
 
 </div>
-
-<!-- Toast -->
-<div class="cc-toast" id="toast">✅ ¡Comentario enviado!</div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="script.js"></script>

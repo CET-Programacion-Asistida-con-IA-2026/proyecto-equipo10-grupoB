@@ -123,32 +123,78 @@ async function buscarPorInput() {
   await evaluarProducto(producto);
 }
 
-async function evaluarProducto(producto) {
-  try {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-6",
-        max_tokens: 1000,
-        system: `Sos un asistente nutricional. Cuando te den el nombre e ingredientes de un producto, respondé SOLO en este formato JSON sin nada más:
-{"resultado": "APTO" o "NO APTO" o "REVISAR", "motivo": "explicación breve en una oración"}`,
-        messages: [{
-          role: "user",
-          content: `Producto: "${producto.nombre}". Ingredientes: "${producto.ingredientes}". ¿Es apto para una persona ${perfilActual}?`
-        }]
-      })
-    });
+// ---- Listas de ingredientes por perfil ----
 
-    const data = await response.json();
-    const json = JSON.parse(data.content[0].text);
+const INGREDIENTES_NO_VEGANO = [
+  // Carnes y pescados
+  "carne", "res", "vacuno", "cerdo", "pollo", "pavo", "cordero", "pescado",
+  "atún", "salmón", "anchoa", "marisco", "camarón", "langostino", "calamar",
+  // Lácteos
+  "leche", "lácteo", "lactosa", "lactosuero", "suero de leche", "caseína",
+  "queso", "manteca", "mantequilla", "crema de leche", "yogur", "nata",
+  // Huevo y derivados
+  "huevo", "albúmina", "clara de huevo", "yema",
+  // Otros de origen animal
+  "miel", "gelatina", "colágeno", "cera de abeja", "propóleo",
+  "grasa animal", "sebo", "manteca de cerdo", "grasa vacuna",
+  // Aditivos de origen animal frecuentes
+  "carmín", "e120", "e441", "e542", "e901", "e904", "e920", "e921",
+  "caseinato", "cochinilla"
+];
 
-    mostrarResultadoPantalla(json.resultado, producto.nombre, json.motivo);
+const INGREDIENTES_NO_VEGETARIANO = [
+  // Solo carnes, pescados y derivados directos de la matanza de animales
+  "carne", "res", "vacuno", "cerdo", "pollo", "pavo", "cordero", "pescado",
+  "atún", "salmón", "anchoa", "marisco", "camarón", "langostino", "calamar",
+  "gelatina", "colágeno", "grasa animal", "sebo", "manteca de cerdo",
+  "grasa vacuna", "caldo de carne", "extracto de carne", "e441", "e542"
+];
 
-  } catch (err) {
-    console.error("Error evaluando producto:", err);
-    alert("No se pudo evaluar el producto. Revisá tu conexión.");
+const INGREDIENTES_NO_CELIACO = [
+  "trigo", "harina de trigo", "almidón de trigo", "salvado de trigo",
+  "cebada", "malta", "extracto de malta", "centeno", "espelta",
+  "kamut", "triticale", "escanda", "avena", // (avena solo si no dice "sin gluten")
+  "sémola", "cuscús", "seitan", "panko",
+  "gluten", "proteína de trigo", "fécula de trigo"
+];
+
+// ---- Motor de decisión ----
+
+function evaluarIngredientes(textoIngredientes, perfil) {
+  const texto = textoIngredientes.toLowerCase();
+
+  let listaProhibidos;
+  if (perfil === "vegano") {
+    listaProhibidos = INGREDIENTES_NO_VEGANO;
+  } else if (perfil === "vegetariano") {
+    listaProhibidos = INGREDIENTES_NO_VEGETARIANO;
+  } else {
+    listaProhibidos = INGREDIENTES_NO_CELIACO;
   }
+
+  const encontrados = listaProhibidos.filter(ingrediente => texto.includes(ingrediente));
+
+  if (encontrados.length > 0) {
+    return {
+      resultado: "NO APTO",
+      motivo: `Contiene: ${encontrados.join(", ")}`
+    };
+  }
+
+  return {
+    resultado: "APTO",
+    motivo: "No se detectaron ingredientes no aptos en esta lista (revisá igual el envase por trazas)."
+  };
+}
+
+async function evaluarProducto(producto) {
+  if (!producto.ingredientes || producto.ingredientes === "Sin información de ingredientes") {
+    alert(`${producto.nombre}\nNo hay información de ingredientes disponible para evaluar este producto.`);
+    return;
+  }
+
+  const evaluacion = evaluarIngredientes(producto.ingredientes, perfilActual);
+  mostrarResultadoPantalla(evaluacion.resultado, producto.nombre, evaluacion.motivo);
 }
 
 function mostrarResultadoPantalla(resultado, nombre, motivo) {
@@ -263,4 +309,11 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initMap);
 } else {
   initMap();
+}
+function elegirPerfil(btn, perfil) {
+  perfilActual = perfil;
+  document.querySelectorAll(".cc-profile-btn").forEach(b => {
+    b.classList.remove("active");
+  });
+  btn.classList.add("active");
 }
