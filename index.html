@@ -116,7 +116,16 @@
   </footer>
 
 </div>
-
+<!-- Semáforo -->
+<!-- Semáforo -->
+<div class="cc-semaforo-overlay" id="semaforo-overlay" onclick="cerrarSemaforoYMostrarResultado()">
+  <div class="cc-semaforo-box">
+    <div class="cc-luz cc-luz-roja" id="luz-roja"></div>
+    <div class="cc-luz cc-luz-amarilla" id="luz-amarilla"></div>
+    <div class="cc-luz cc-luz-verde" id="luz-verde"></div>
+  </div>
+  <p class="cc-semaforo-texto" id="semaforo-texto">Analizando producto...</p>
+</div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="script.js"></script>
 </body>

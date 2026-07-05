@@ -474,3 +474,84 @@ css/* ---- Escáner de código de barras ---- */
   background-color: #fde68a !important;
   transition: background-color 0.3s;
 }
+/* ---- Semáforo ---- */
+.cc-semaforo-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.cc-semaforo-overlay.mostrar {
+  display: flex;
+}
+
+.cc-semaforo-box {
+  background: var(--borgona);
+  border-radius: 24px;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cc-luz {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  opacity: 1;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.cc-luz-roja.encendida {
+  background: #ef4444;
+  border-color: #ef4444;
+  box-shadow: 0 0 30px #ef4444;
+}
+
+.cc-luz-amarilla.encendida {
+  background: #eab308;
+  border-color: #eab308;
+  box-shadow: 0 0 30px #eab308;
+}
+
+.cc-luz-verde.encendida {
+  background: #22c55e;
+  border-color: #22c55e;
+  box-shadow: 0 0 30px #22c55e;
+}
+
+.cc-luz-roja.encendida {
+  background: #ef4444;
+  opacity: 1;
+  box-shadow: 0 0 30px #ef4444;
+}
+
+.cc-luz-amarilla.encendida {
+  background: #eab308;
+  opacity: 1;
+  box-shadow: 0 0 30px #eab308;
+}
+
+.cc-luz-verde.encendida {
+  background: #22c55e;
+  opacity: 1;
+  box-shadow: 0 0 30px #22c55e;
+}
+
+.cc-semaforo-texto {
+  color: white;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 14px;
+  text-align: center;
+  max-width: 280px;
+}
