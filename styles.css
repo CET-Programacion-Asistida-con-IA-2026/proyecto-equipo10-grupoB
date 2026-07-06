@@ -261,7 +261,6 @@ body {
 }
 
 .cc-filtro-celiaco.activo      { background: var(--c-celiaco);     border-color: var(--c-celiaco);     color: #fff; }
-.cc-filtro-diabetico.activo    { background: var(--c-diabetico);   border-color: var(--c-diabetico);   color: #fff; }
 .cc-filtro-vegano.activo       { background: var(--c-vegano);      border-color: var(--c-vegano);      color: #fff; }
 .cc-filtro-vegetariano.activo  { background: var(--c-vegetariano); border-color: var(--c-vegetariano); color: #fff; }
 .cc-filtro-multiapto.activo    { background: var(--c-multiapto);   border-color: var(--c-multiapto);   color: #fff; }

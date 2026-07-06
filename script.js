@@ -237,6 +237,14 @@ const PLACES = [
   { id: 13, name: 'Mosaico Gastronómico', type: 'Restaurante familiar', category: 'multiapto', address: 'Av. Córdoba 5500, Palermo, CABA', lat: -34.5861, lng: -58.4421, tags: ['Sin TACC', 'Vegano', 'Vegetariano', 'Bajo en azúcar', 'Familiar'], info: '⭐ El restaurante más inclusivo de la zona. Carta dividida por perfil: celíaco, diabético, vegano y vegetariano.' },
   { id: 14, name: 'Casa Común', type: 'Cafetería · Restaurante', category: 'multiapto', address: 'Humboldt 1764, Palermo, CABA', lat: -34.5893, lng: -58.4367, tags: ['Sin TACC', 'Vegano', 'Vegetariano', 'Sin azúcar', 'Niños'], info: '⭐ Espacio diseñado para toda la familia. Menú infantil, opciones celíacas, veganas y para diabéticos.' },
   { id: 15, name: 'El Encuentro', type: 'Restaurante · Bar', category: 'multiapto', address: 'Costa Rica 5644, Palermo, CABA', lat: -34.5816, lng: -58.4282, tags: ['Sin TACC', 'Vegano', 'Bajo en carbohidratos', 'Pet friendly'], info: '⭐ Carta inclusiva con opciones para todos. Pet friendly con espacio exterior.' },
+  { id: 16, name: 'Let It V', type: 'Restaurante vegano', category: 'vegano', address: 'Costa Rica 5865, Palermo, CABA', lat: -34.5893, lng: -58.4321, tags: ['100% vegano', 'Sin gluten', 'Nikkei'], info: 'Pionero en Buenos Aires en propuesta 100% vegana y sin gluten. Carta con influencia peruana y nikkei.' },
+  { id: 17, name: 'Donnet', type: 'Restaurante vegano', category: 'vegano', address: 'Fraga 675, Chacarita, CABA', lat: -34.5865, lng: -58.4548, tags: ['100% vegano', 'Crudivegano', 'Sin gluten'], info: 'Restaurante enfocado en hongos, con técnicas de fermentación y deshidratación. Apto vegano y celíaco.' },
+  { id: 18, name: 'Casa Munay', type: 'Restaurante vegetariano', category: 'vegetariano', address: 'Chacarita, CABA', lat: -34.5880, lng: -58.4530, tags: ['Vegetariano', 'Vegano', 'Ingredientes orgánicos'], info: 'Espacio con platos vegetarianos y veganos elaborados con ingredientes orgánicos y frescos.' },
+  { id: 19, name: 'Sacro', type: 'Restaurante vegano', category: 'vegano', address: 'Palermo, CABA', lat: -34.5878, lng: -58.4290, tags: ['100% vegano', 'Gourmet'], info: 'Cocina vegana a base de plantas y hongos, con carta estacional y platos de autor.' },
+  { id: 20, name: 'Chuí', type: 'Restaurante vegetariano', category: 'vegetariano', address: 'Villa Crespo, CABA', lat: -34.5978, lng: -58.4398, tags: ['Vegetariano', 'Platitos para compartir'], info: 'Cocina veggie de autor en un galpón con jardín. Platos pensados para compartir, con foco en productos de estación.' },
+  /*interior de buenos aires*/
+  { id: 21, name: 'Wara Cocina de Origen', type: 'Restaurante vegano', category: 'vegano', address: 'Olavarría 2876, Mar del Plata', lat: -38.0149816, lng: -57.5424148, tags: ['Vegano', 'Vegetariano', 'Carnes veganas propias'], info: '⭐ Muy buena reputación (4.5★). Preparan sus propias "carnes" veganas, flan vegano y platos elaborados con dedicación.' },
+  { id: 22, name: 'Akari Sushi Bar', type: 'Restaurante japonés', category: 'vegetariano', address: 'Diagonal 74 N°1531, La Plata', lat: -34.9164903, lng: -57.9551281, tags: ['Sushi', 'Opciones vegetarianas'], info: 'Muy bien valorado (4.6★). Sushi de calidad con opciones para vegetarianos.' },
 ];
 
 // Colores armonizados con la paleta por perfil del resto del sitio
@@ -257,10 +265,28 @@ function createMarkerIcon(category, isActive = false) {
   const cfg = CATEGORY_CONFIG[category];
   const color = cfg.color;
   const size = isActive ? 40 : 32;
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 32 32"><circle cx="16" cy="16" r="11" fill="${color}" stroke="#fff" stroke-width="2.5" filter="drop-shadow(0 2px 4px rgba(0,0,0,.25))"/><circle cx="16" cy="16" r="5" fill="#fff" opacity=".85"/></svg>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 32 32"><circle cx="16" cy="16" r="11" fill="${color}" stroke="#fff" stroke-width="2.5"/><circle cx="16" cy="16" r="5" fill="#fff" opacity=".85"/></svg>`;
   return L.divIcon({ html: svg, className: 'custom-marker', iconSize: [size, size], iconAnchor: [size/2, size/2], popupAnchor: [0, -(size/2+4)] });
 }
 
+function addMarkers(places) {
+  places.forEach(place => {
+    const cfg = CATEGORY_CONFIG[place.category];
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lng}`;
+    const popupContent = `
+      <div style="font-family:sans-serif;min-width:180px">
+        <p style="color:${cfg.color};font-weight:bold;margin:0 0 4px">${cfg.emoji} ${cfg.label}</p>
+        <p style="font-weight:bold;margin:0 0 2px">${place.name}</p>
+        <p style="font-size:12px;color:#666;margin:0 0 8px">${place.address}</p>
+        <a href="${mapsUrl}" target="_blank" rel="noopener noreferrer"
+           style="display:inline-block;background:${cfg.color};color:#fff;text-decoration:none;font-size:12px;font-weight:bold;padding:6px 10px;border-radius:6px;">
+          📍 Ver en Google Maps
+        </a>
+      </div>`;
+    const marker = L.marker([place.lat, place.lng], { icon: createMarkerIcon(place.category, false) }).addTo(map).bindPopup(popupContent, { maxWidth: 240 });
+    markers[place.id] = marker;
+  });
+}
 function getFilteredPlaces() {
   if (activeCategory === 'all') return PLACES;
   return PLACES.filter(p => p.category === activeCategory);
@@ -271,14 +297,6 @@ function clearMarkers() {
   markers = {};
 }
 
-function addMarkers(places) {
-  places.forEach(place => {
-    const cfg = CATEGORY_CONFIG[place.category];
-    const popupContent = `<div style="font-family:sans-serif;min-width:180px"><p style="color:${cfg.color};font-weight:bold;margin:0 0 4px">${cfg.emoji} ${cfg.label}</p><p style="font-weight:bold;margin:0 0 2px">${place.name}</p><p style="font-size:12px;color:#666;margin:0 0 8px">${place.address}</p></div>`;
-    const marker = L.marker([place.lat, place.lng], { icon: createMarkerIcon(place.category, false) }).addTo(map).bindPopup(popupContent, { maxWidth: 240 });
-    markers[place.id] = marker;
-  });
-}
 
 function applyFilter(category) {
   activeCategory = category;
@@ -310,7 +328,6 @@ function initMap() {
     subdomains: 'abcd',
     maxZoom: 19,
   }).addTo(map);
-
   applyFilter('all');
 }
 
