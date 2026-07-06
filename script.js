@@ -50,11 +50,22 @@ async function buscarPorInput() {
 
   if (!producto) {
     ocultarSemaforo();
-    alert("No se encontró ningún producto con ese código.");
+    mostrarResultadoSimple("⚠️ No encontrado", "No se encontró ningún producto con ese código de barras.");
     return;
   }
 
   await evaluarProducto(producto);
+}
+
+// ---- Resultado persistente (debajo del buscador) ----
+function mostrarResultadoSimple(estadoTexto, texto) {
+  const div = document.getElementById("resultado-scan");
+  const estado = document.getElementById("resultado-estado");
+  const textoEl = document.getElementById("resultado-texto");
+  div.style.display = "block";
+  div.className = "cc-resultado amarillo";
+  estado.textContent = estadoTexto;
+  textoEl.textContent = texto;
 }
 
 // ---- Semáforo ----
@@ -66,6 +77,7 @@ function mostrarSemaforo() {
   document.getElementById("luz-amarilla").classList.add("encendida");
   document.getElementById("luz-verde").classList.remove("encendida");
   document.getElementById("semaforo-texto").textContent = "Analizando producto...";
+  document.getElementById("resultado-scan").style.display = "none";
   resultadoPendiente = null;
 }
 
@@ -76,13 +88,13 @@ function ocultarSemaforo() {
 async function evaluarProducto(producto) {
   if (!perfilActual) {
     ocultarSemaforo();
-    alert("Antes de buscar, seleccioná tu perfil alimentario (Celiaco, Vegetariano o Vegano) arriba en '¿Cuál es tu alimentación?'.");
+    mostrarResultadoSimple("⚠️ Falta perfil", "Antes de buscar, seleccioná tu perfil alimentario (Celíaco, Vegetariano o Vegano) arriba en '¿Cuál es tu alimentación?'.");
     return;
   }
 
   if (!producto.ingredientes || producto.ingredientes === "Sin información de ingredientes") {
     ocultarSemaforo();
-    alert(`${producto.nombre}\nNo hay información de ingredientes disponible para evaluar este producto.`);
+    mostrarResultadoSimple("ℹ️ Sin datos", `${producto.nombre}: no hay información de ingredientes disponible para evaluar este producto.`);
     return;
   }
 
@@ -95,7 +107,16 @@ async function evaluarProducto(producto) {
     document.getElementById("luz-roja").classList.add("encendida");
   }
   document.getElementById("semaforo-texto").textContent =
-    `${producto.nombre}: ${evaluacion.resultado}. ${evaluacion.motivo} — Tocá la pantalla para continuar.`;
+    `${producto.nombre}: ${evaluacion.resultado}. Tocá la pantalla para ver el detalle.`;
+
+  // Caja persistente con el motivo (no desaparece como el semáforo)
+  const div = document.getElementById("resultado-scan");
+  const estado = document.getElementById("resultado-estado");
+  const texto = document.getElementById("resultado-texto");
+  div.style.display = "block";
+  div.className = "cc-resultado " + (evaluacion.resultado === "APTO" ? "verde" : "rojo");
+  estado.textContent = evaluacion.resultado === "APTO" ? "🟢 APTO" : "🔴 NO APTO";
+  texto.textContent = `${producto.nombre} — ${evaluacion.motivo}`;
 
   resultadoPendiente = evaluacion.resultado;
 }
@@ -201,11 +222,12 @@ const PLACES = [
   { id: 15, name: 'El Encuentro', type: 'Restaurante · Bar', category: 'multiapto', address: 'Costa Rica 5644, Palermo, CABA', lat: -34.5816, lng: -58.4282, tags: ['Sin TACC', 'Vegano', 'Bajo en carbohidratos', 'Pet friendly'], info: '⭐ Carta inclusiva con opciones para todos. Pet friendly con espacio exterior.' },
 ];
 
+// Colores armonizados con la paleta por perfil del resto del sitio
 const CATEGORY_CONFIG = {
-  celiaco:     { color: '#3B82F6', label: 'Celíacos',     emoji: '🟦' },
-  diabetico:   { color: '#22C55E', label: 'Diabéticos',   emoji: '🟩' },
-  vegano:      { color: '#EAB308', label: 'Veganos',      emoji: '🟨' },
-  vegetariano: { color: '#F97316', label: 'Vegetarianos', emoji: '🟧' },
+  celiaco:     { color: '#3B82F6', label: 'Celíacos',     emoji: '🌾' },
+  diabetico:   { color: '#F97316', label: 'Diabéticos',   emoji: '🩺' },
+  vegano:      { color: '#22C55E', label: 'Veganos',      emoji: '🌱' },
+  vegetariano: { color: '#84CC16', label: 'Vegetarianos', emoji: '🥗' },
   multiapto:   { color: '#A855F7', label: 'Multiaptos ⭐', emoji: '⭐' },
 };
 
@@ -250,6 +272,15 @@ function applyFilter(category) {
     const bounds = filtered.map(p => [p.lat, p.lng]);
     map.fitBounds(bounds, { padding: [40, 40], maxZoom: 15, animate: true });
   }
+}
+
+// Wrapper: resalta el chip tocado y aplica el filtro
+function filtrarMapa(btn, category) {
+  document.querySelectorAll('.cc-mapa-filtro').forEach(b => {
+    b.classList.remove('activo');
+  });
+  btn.classList.add('activo');
+  applyFilter(category);
 }
 
 function initMap() {

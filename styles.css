@@ -10,6 +10,13 @@
   --rojo-vivo: #D62E1A;
   --verde-moo: #4CAF50;
   --crema: #FFF8E7;
+
+  /* Colores por perfil (coinciden con CATEGORY_CONFIG del mapa en script.js) */
+  --c-celiaco: #3B82F6;
+  --c-diabetico: #F97316;
+  --c-vegano: #22C55E;
+  --c-vegetariano: #84CC16;
+  --c-multiapto: #A855F7;
 }
 
 /* Reset & base */
@@ -32,7 +39,7 @@ body {
 }
 
 .cc-section {
-  padding: 6rem 1.5rem 1.5rem;
+  padding: 1.5rem 1.5rem 0;
 }
 
 .cc-divider {
@@ -41,14 +48,12 @@ body {
   opacity: 0.08;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
 }
 
 /* ---- Header / Hero ---- */
 .cc-hero {
   background: var(--amarillo);
-  padding: 4rem 2rem 4rem;
+  padding: 2.5rem 1.5rem 2rem;
   position: relative;
   overflow: hidden;
 }
@@ -68,7 +73,7 @@ body {
 
 .cc-logo {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 62px;
+  font-size: 42px;
   color: var(--borgona);
   line-height: 0.9;
   letter-spacing: -1px;
@@ -78,59 +83,42 @@ body {
   font-style: italic;
   font-family: 'Fraunces', serif;
   color: var(--rojo-vivo);
-  font-size: 54px;
+  font-size: 44px;
 }
 
 .cc-tagline {
   font-size: 13px;
   color: var(--borgona);
   opacity: 0.65;
-  margin-top: 16px;
+  margin-top: 8px;
   font-weight: 500;
-}
-
-.cc-badge-row {
-  display: flex;
-  gap: 6px;
-  margin-top: 12px;
-  flex-wrap: wrap;
-}
-
-.cc-badge {
-  background: var(--borgona);
-  color: var(--amarillo);
-  font-family: 'Archivo Black', sans-serif;
-  font-size: 10px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  letter-spacing: 0.04em;
 }
 
 /* ---- Títulos de sección ---- */
 .cc-sec-title {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 20px;
+  font-size: 13px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--borgona);
   opacity: 0.5;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 }
 
 /* ---- Perfil alimentario ---- */
 .cc-profile-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  justify-content: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
 }
+
 .cc-profile-btn {
   aspect-ratio: 1 / 1;
   border: none;
-  border-radius: 24px;
+  border-radius: 20px;
   background: var(--amarillo-claro);
   font-family: 'Archivo Black', sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   color: var(--borgona);
   cursor: pointer;
   display: flex;
@@ -140,26 +128,30 @@ body {
   gap: 8px;
   transition: all 0.15s;
   letter-spacing: 0.02em;
-  max-width: 350px;
   width: 100%;
-}
-.cc-profile-btn i {
-  font-size: 32px;
-  font-style: normal;
 }
 
 .cc-profile-btn i {
-  font-size: 18px;
+  font-size: 26px;
+  font-style: normal;
 }
 
 .cc-profile-btn.active {
   background: var(--borgona);
   color: var(--amarillo);
-  border-color: var(--borgona);
 }
 
-/* ---- Zona de escaneo ---- */
-.cc-scan-zone {
+/* ---- Escáner (mobile / desktop) ---- */
+.cc-scan-mobile {
+  display: block;
+}
+
+.cc-scan-desktop {
+  display: none;
+}
+
+.cc-scan-btn {
+  width: 100%;
   border: 2.5px dashed var(--borgona);
   border-radius: 16px;
   background: transparent;
@@ -169,146 +161,45 @@ body {
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  transition: background 0.2s;
-  position: relative;
-  overflow: hidden;
-}
-
-.cc-scan-zone:hover {
-  background: rgba(61, 10, 20, 0.04);
-}
-
-.cc-scan-zone.scanning {
-  background: var(--amarillo);
-  border-style: solid;
-}
-
-.cc-scan-ico {
-  font-size: 40px;
-  color: var(--borgona);
-  transition: color 0.2s;
-}
-
-.cc-scan-label {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--borgona);
-  letter-spacing: 0.03em;
 }
 
-.cc-scan-hint {
-  font-size: 11px;
-  color: var(--borgona);
-  opacity: 0.5;
+.cc-scan-btn i {
+  font-size: 40px;
+  font-style: normal;
 }
 
-.scan-bar {
-  display: none;
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--rojo-vivo);
-  animation: scanMove 1.3s ease-in-out infinite;
-}
-
-.cc-scan-zone.scanning .scan-bar {
-  display: block;
-}
-
-@keyframes scanMove {
-  0%   { top: 0; }
-  50%  { top: 95%; }
-  100% { top: 0; }
-}
-
-/* ---- Pills de ejemplo ---- */
-.cc-demos {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-.cc-demo-pill {
-  border: 2px solid var(--borgona);
-  border-radius: 999px;
-  background: transparent;
-  padding: 5px 14px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--borgona);
-  cursor: pointer;
-  transition: --background 0.15s, color 0.15s;
-}
-
-.cc-demo-pill:hover {
-  background: var(--borgona);
-  color: var(--amarillo);
+@media (min-width: 768px) {
+  .cc-scan-mobile { display: none; }
+  .cc-scan-desktop { display: flex; gap: 8px; }
+  .cc-scan-desktop input {
+    flex: 1;
+    padding: 0 12px;
+    height: 42px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+  }
 }
 
 /* === VERIFICADOR === */
+.cc-verificador {
+  padding: 1.5rem 1.5rem 0;
+}
+
 .cc-sub {
   font-size: 14px;
   color: #666;
   margin-bottom: 1rem;
 }
 
-.cc-perfiles {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
-}
-
-.cc-perfil-btn {
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background: #fff;
-  color: #555;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.cc-perfil-btn.activo {
-  border-color: #3b82f6;
-  background: #eff6ff;
-  color: #1d4ed8;
-  font-weight: 500;
-}
-
-.cc-input-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 1rem;
-}
-
-.cc-input-row input {
-  flex: 1;
-  padding: 0 12px;
-  height: 42px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 15px;
-}
-
-.cc-btn-verificar {
-  padding: 0 20px;
-  height: 42px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background: #fff;
-  font-size: 14px;
-  cursor: pointer;
-}
-
 .cc-resultado {
   display: none;
   border-radius: 12px;
   padding: 1rem 1.25rem;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .cc-resultado.verde {
@@ -326,42 +217,64 @@ body {
   background: #fef2f2;
 }
 
-/* ---- Mapa ---- */
-.cc-mapa {
+#resultado-estado {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+#resultado-texto {
+  font-size: 13.5px;
+  opacity: 0.85;
+  line-height: 1.4;
+}
+
+/* ---- Filtros del mapa ---- */
+.cc-mapa-filtros {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 1.5rem;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
 }
 
-.cc-mapa iframe {
-  width: 100%;
-  height: 200px;
-  border-radius: 12px;
+.cc-mapa-filtro {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1.5px solid #ddd;
+  background: #fff;
+  color: #666;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.cc-mapa-filtro:hover {
+  border-color: var(--borgona);
+}
+
+.cc-mapa-filtro.activo {
+  border-color: var(--borgona);
+  background: var(--borgona);
+  color: var(--amarillo);
+}
+
+.cc-filtro-celiaco.activo      { background: var(--c-celiaco);     border-color: var(--c-celiaco);     color: #fff; }
+.cc-filtro-diabetico.activo    { background: var(--c-diabetico);   border-color: var(--c-diabetico);   color: #fff; }
+.cc-filtro-vegano.activo       { background: var(--c-vegano);      border-color: var(--c-vegano);      color: #fff; }
+.cc-filtro-vegetariano.activo  { background: var(--c-vegetariano); border-color: var(--c-vegetariano); color: #fff; }
+.cc-filtro-multiapto.activo    { background: var(--c-multiapto);   border-color: var(--c-multiapto);   color: #fff; }
+
+/* ---- Mapa (Leaflet) ---- */
+.cc-mapa-leaflet {
+  height: 400px;
+  border-radius: 16px;
   border: 2px solid var(--borgona);
+  overflow: hidden;
+  margin: 0 0 1.5rem;
 }
 
-/* ---- Info Perfil ---- */
-.perfil-info {
-  display: none;
-}
-
-/* ---- Responsivo: tablet y computadora ---- */
-@media (min-width: 768px) {
-  .cc-wrapper { max-width: 1200px; }
-  .cc-logo { font-size: 80px; }
-  .cc-logo em { font-size: 82px; }
-  .cc-tagline { font-size: 25px; }
-  .cc-hero { padding: 5rem 2.5rem 5rem; }
-.cc-profile-grid { grid-template-columns: 1fr 1fr 1fr; }
-  .cc-mapa { flex-direction: row; }
-  .cc-mapa iframe { height: 300px; }
-  .cc-locales { flex-direction: row; }
-  .cc-local { flex: 1; }
-}
-#educativa h2 {
-  font-size: 18px;
-}
 /* ---- Formulario ---- */
 .cc-form {
   border: 2px solid var(--amarillo);
@@ -406,67 +319,57 @@ body {
   cursor: pointer;
 }
 
-
-¡Buenísimo! 🎉 Ahora sí, vamos con el CSS para que se muestre solo uno de los dos según el dispositivo.
-Agregá esto al final de tu styles.css:
-css/* ---- Escáner de código de barras ---- */
-
-
-/* Por defecto (mobile): mostrar escáner, esconder input manual */
-
-
-.cc-scan-mobile {
-  display: block;
-}
-
-
-
-
-.cc-scan-desktop {
-  display: none;
-}
-
-.cc-scan-btn {
-  width: 100%;
-  border: 2.5px dashed var(--borgona);
-  border-radius: 16px;
-  background: transparent;
-  padding: 2rem 1rem;
+/* ---- Footer ---- */
+.cc-footer {
+  background: var(--borgona);
+  padding: 1.75rem 1.5rem;
+  margin-top: 1.75rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  cursor: pointer;
+  justify-content: space-between;
+}
+
+.cc-footer-logo {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 14px;
-  color: var(--borgona);
+  font-size: 20px;
+  color: var(--amarillo);
 }
 
-.cc-scan-btn i {
-  font-size: 40px;
-  font-style: normal;
+.cc-footer-logo em {
+  font-style: italic;
+  font-family: 'Fraunces', serif;
+  color: #fff;
 }
 
-/* En pantallas grandes: esconder escáner, mostrar input manual */
-@media (min-width: 768px) {
-  .cc-scan-mobile {
-    display: none;
-  }
-
-  .cc-scan-desktop {
-    display: flex;
-    gap: 8px;
-  }
-
-  .cc-scan-desktop input {
-    flex: 1;
-    padding: 0 12px;
-    height: 42px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 15px;
-  }
+.cc-footer-links {
+  display: flex;
+  gap: 14px;
+  font-size: 18px;
 }
+
+/* ---- Toast ---- */
+.cc-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--borgona);
+  color: var(--amarillo);
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  z-index: 999;
+}
+
+.cc-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 /* ---- Flash de resultado en pantalla completa ---- */
 .cc-flash-verde {
   background-color: #86efac !important;
@@ -482,6 +385,7 @@ css/* ---- Escáner de código de barras ---- */
   background-color: #fde68a !important;
   transition: background-color 0.3s;
 }
+
 /* ---- Semáforo ---- */
 .cc-semaforo-overlay {
   display: none;
@@ -516,7 +420,6 @@ css/* ---- Escáner de código de barras ---- */
   border-radius: 50%;
   background: #1a1a1a;
   border: 2px solid rgba(255, 255, 255, 0.15);
-  opacity: 1;
   transition: background 0.3s, box-shadow 0.3s;
 }
 
@@ -538,24 +441,6 @@ css/* ---- Escáner de código de barras ---- */
   box-shadow: 0 0 30px #22c55e;
 }
 
-.cc-luz-roja.encendida {
-  background: #ef4444;
-  opacity: 1;
-  box-shadow: 0 0 30px #ef4444;
-}
-
-.cc-luz-amarilla.encendida {
-  background: #eab308;
-  opacity: 1;
-  box-shadow: 0 0 30px #eab308;
-}
-
-.cc-luz-verde.encendida {
-  background: #22c55e;
-  opacity: 1;
-  box-shadow: 0 0 30px #22c55e;
-}
-
 .cc-semaforo-texto {
   color: white;
   font-family: 'Archivo Black', sans-serif;
@@ -564,52 +449,12 @@ css/* ---- Escáner de código de barras ---- */
   max-width: 280px;
 }
 
-/* =========================================================
-   FOOTER
-   ========================================================= */
-.cc-footer {
-  background: var(--borgona);
-  padding: 1.75rem 1.5rem;
-  margin-top: 1.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-/* =========================================================
-   TOAST
-   ========================================================= */
-.cc-toast {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  background: var(--borgona);
-  color: var(--amarillo);
-  padding: 12px 22px;
-  border-radius: 999px;
-  font-size: 13.5px;
-  font-weight: 500;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.25s ease;
-  z-index: 999;
-}
- 
-.cc-toast.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
- 
-/* =========================================================
-   RESPONSIVO: TABLET Y COMPUTADORA
-   ========================================================= */
+/* ---- Responsivo: tablet y computadora ---- */
 @media (min-width: 768px) {
-  .cc-wrapper { max-width: 900px; box-shadow: 0 0 40px rgba(0,0,0,0.06); }
+  .cc-wrapper { max-width: 900px; }
   .cc-logo { font-size: 60px; }
   .cc-logo em { font-size: 62px; }
   .cc-tagline { font-size: 16px; }
   .cc-hero { padding: 3rem 2.5rem 2rem; }
-  .cc-profile-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
-  .cc-mapa-leaflet { height: 440px; }
-  .cc-form { padding: 1.75rem; }
+  .cc-mapa-leaflet { height: 460px; }
 }
