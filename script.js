@@ -14,11 +14,28 @@ function elegirPerfil(btn, perfil) {
 }
 
 // ---- Formulario ----
+
 function enviarFormulario() {
-  let toast = document.getElementById('toast')
-  toast.classList.add('show')
-  setTimeout(() => toast.classList.remove('show'), 3000)
+  const boton = document.querySelector('.cc-form .cc-submit');
+  const toast = document.getElementById('toast');
+
+  // Cambiar texto y estilo del botón
+  boton.textContent = "✔ Enviado";
+  boton.classList.add('cc-enviado');
+  boton.disabled = true;
+
+  // Mostrar el toast
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+
+  // Volver el botón a su estado original después de un tiempo
+  setTimeout(() => {
+    boton.textContent = "Enviar →";
+    boton.classList.remove('cc-enviado');
+    boton.disabled = false;
+  }, 3000);
 }
+
 
 // ---- Búsqueda de producto (Open Food Facts) ----
 async function buscarProductoPorCodigo(codigo) {
