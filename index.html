@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CeliaCheck</title>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fraunces:ital@1&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div class="cc-wrapper">
 
   <!-- HERO -->
   <header class="cc-hero">
@@ -18,46 +17,86 @@
     <p class="cc-tagline">"Encontrá alimentos y lugares aptos para vos."</p>
   </header>
 
-<div class="cc-wrapper">
-
   <!-- ALIMENTACIÓN -->
   <section class="cc-section">
     <p class="cc-sec-title">¿Cuál es tu alimentación?</p>
     <div class="cc-profile-grid">
-      <button class="cc-profile-btn" onclick="elegirPerfil(this, 'celiaco')">
+      <button onclick="mostrarSeccion('diabetico')">
+        <i>🩺</i> Diabético
+      </button>
+      <button onclick="mostrarSeccion('celiaco')">
         <i>🌾</i> Celiaco
       </button>
-      <button class="cc-profile-btn" onclick="elegirPerfil(this, 'vegetariano')">
+      <button onclick="mostrarSeccion('vegetariano')">
         <i>🥗</i> Vegetariano
       </button>
-      <button class="cc-profile-btn" onclick="elegirPerfil(this, 'vegano')">
+      <button onclick="mostrarSeccion('vegano')">
         <i>🌱</i> Vegano
       </button>
     </div>
   </section>
 
+  <div class="cc-divider"></div>
+
+  <section id="educativa">
+    <h2>📚 Sección educativa</h2>
+
+    <div id="diabetico" class="perfil-info">
+      <h3>🩺 Diabetes</h3>
+      <p><strong>❌ Qué alimentos evitar</strong></p>
+      <p>Pan, pastas y productos con gluten.</p>
+      <p><strong>🏷️ ¿Qué significa Sin TACC?</strong></p>
+      <p>Producto libre de trigo, avena, cebada y centeno.</p>
+      <p><strong>✅ Alternativas seguras</strong></p>
+      <p>Arroz, maíz y quinoa.</p>
+    </div>
+
+    <div id="celiaco" class="perfil-info">
+      <h3>🌾 Celiaco</h3>
+      <p><strong>❌ Qué alimentos evitar</strong></p>
+      <p>Azúcares refinados y harinas blancas.</p>
+      <p><strong>✅ Alternativas seguras</strong></p>
+      <p>Frutas, verduras y granos integrales.</p>
+    </div>
+
+    <div id="vegetariano" class="perfil-info">
+      <h3>🥗 Vegetariano</h3>
+      <p><strong>❌ Qué alimentos evitar</strong></p>
+      <p>Productos de origen animal.</p>
+      <p><strong>✅ Alternativas seguras</strong></p>
+      <p>Legumbres, frutas, verduras y nueces.</p>
+    </div>
+
+    <div id="vegano" class="perfil-info">
+      <h3>🌱 Vegano</h3>
+      <p><strong>❌ Qué alimentos evitar</strong></p>
+      <p>Carne, pescado y productos de origen animal.</p>
+      <p><strong>✅ Alternativas seguras</strong></p>
+      <p>Frutas, verduras, granos y productos lácteos (según el tipo de vegetarianismo).</p>
+    </div>
+  </section>
+
+  <div class="cc-divider"></div>
+
   <!-- VERIFICADOR -->
   <div class="cc-verificador">
-    <p class="cc-sec-title">Verificador de alimentos</p>
+    <p class="cc-sec-title">Escanea tu alimento</p>
     <p class="cc-sub">Seleccioná tu perfil y escribí un alimento.</p>
 
-    <!-- Escáner para celular -->
-    <div class="cc-scan-mobile">
-      <button class="cc-scan-btn" onclick="alert('Acá vamos a abrir la cámara')">
-        <i>📷</i>
-        <span>Escanear código de barras</span>
-      </button>
+    <div class="cc-perfiles">
+      <button class="cc-perfil-btn activo" onclick="selPerfil(this, 'vegano')">Vegano</button>
+      <button class="cc-perfil-btn" onclick="selPerfil(this, 'vegetariano')">Vegetariano</button>
+      <button class="cc-perfil-btn" onclick="selPerfil(this, 'diabetico')">Diabético</button>
+      <button class="cc-perfil-btn" onclick="selPerfil(this, 'celiaco')">Celiaco</button>
     </div>
 
-    <!-- Input manual para compu -->
-    <div class="cc-scan-desktop">
-      <input type="text" id="codigo-barras" placeholder="Escribí el código de barras del producto..."
-        onkeydown="if(event.key==='Enter') buscarPorInput()">
-      <button class="cc-submit" onclick="buscarPorInput()">Buscar</button>
+    <div class="cc-input-row">
+      <input id="alimento-input" type="text" placeholder="Ej: arroz, pollo, leche..."
+        onkeydown="if(event.key==='Enter') verificar()" />
+      <button onclick="verificar()">Verificar</button>
     </div>
 
-    <!-- Resultado persistente: queda visible con el motivo hasta la próxima búsqueda -->
-    <div class="cc-resultado" id="resultado-scan">
+    <div class="cc-resultado" id="resultado">
       <p id="resultado-estado"></p>
       <p id="resultado-texto"></p>
     </div>
@@ -65,44 +104,35 @@
 
   <div class="cc-divider"></div>
 
-  <!-- SECCIÓN EDUCATIVA -->
-  <section class="cc-section cc-educativa">
-    <p class="cc-sec-title">¿Sabías que...?</p>
-    <div class="cc-edu-grid">
-      <div class="cc-edu-card cc-edu-celiaco">
-        <i>🌾</i>
-        <h3>Celiaquía</h3>
-        <p>Es una intolerancia permanente al gluten. Aunque sea "poquito", puede dañar el intestino.</p>
-      </div>
-      <div class="cc-edu-card cc-edu-vegano">
-        <i>🌱</i>
-        <h3>Veganismo</h3>
-        <p>Excluye todo producto de origen animal: carne, lácteos, huevo y también miel.</p>
-      </div>
-      <div class="cc-edu-card cc-edu-vegetariano">
-        <i>🥗</i>
-        <h3>Vegetarianismo</h3>
-        <p>No incluye carnes, pero sí puede incluir huevo, lácteos y miel según el tipo.</p>
-      </div>
-    
-    </section>
-
   <!-- MAPA -->
   <section class="cc-section">
     <p class="cc-sec-title">Encontrá lo que buscás</p>
-  <div class="cc-mapa-filtros"></div>
-      <button class="cc-mapa-filtro activo" data-cat="all" onclick="filtrarMapa(this, 'all')">Todos</button>
-      <button class="cc-mapa-filtro cc-filtro-celiaco" data-cat="celiaco" onclick="filtrarMapa(this, 'celiaco')">🌾 Celíaco</button>
-      <button class="cc-mapa-filtro cc-filtro-vegano" data-cat="vegano" onclick="filtrarMapa(this, 'vegano')">🌱 Vegano</button>
-      <button class="cc-mapa-filtro cc-filtro-vegetariano" data-cat="vegetariano" onclick="filtrarMapa(this, 'vegetariano')">🥗 Vegetariano</button>
-      <button class="cc-mapa-filtro cc-filtro-multiapto" data-cat="multiapto" onclick="filtrarMapa(this, 'multiapto')">⭐ Multiapto</button>
+    <div class="cc-mapa">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6564.879366293189!2d-58.5662010248824!3d-34.6435973596044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc7c982b64147%3A0xe13a877bcf364586!2sVERT%20Plantas%2BDeco%2BCaf%C3%A9!5e0!3m2!1ses-419!2sar!4v1782332700865!5m2!1ses-419!2sar" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52577.067550098305!2d-58.498696778320294!3d-34.551866000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb5f041dda9ab%3A0x70726b4847a62174!2sGaribaldi%20Restaurante!5e0!3m2!1ses-419!2sar!4v1781987186324!5m2!1ses-419!2sar" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
-  <div id="map" class="cc-mapa-leaflet"></div>
+    <div id="map" style="height: 400px; border-radius: 12px; margin: 0 1.5rem 1.5rem;"></div>
+    <div class="cc-locales">
+      <div class="cc-local">
+        <div class="cc-local-ico">🥗</div>
+        <div>
+          <div class="cc-local-name">Verde Vida</div>
+          <div class="cc-local-meta">Palermo · 300m</div>
+        </div>
+        <span class="cc-local-badge">Vegano</span>
+      </div>
+      <div class="cc-local">
+        <div class="cc-local-ico">🌾</div>
+        <div>
+          <div class="cc-local-name">Sin TACC</div>
+          <div class="cc-local-meta">Belgrano · 600m</div>
+        </div>
+        <span class="cc-local-badge">Celíaco</span>
+      </div>
+    </div>
   </section>
 
   <div class="cc-divider"></div>
-
-  
 
   <!-- FORMULARIO -->
   <section class="cc-section" style="padding-bottom: 1.5rem">
@@ -126,15 +156,8 @@
 
 </div>
 
-<!-- Semáforo -->
-<div class="cc-semaforo-overlay" id="semaforo-overlay" onclick="cerrarSemaforoYMostrarResultado()">
-  <div class="cc-semaforo-box">
-    <div class="cc-luz cc-luz-roja" id="luz-roja"></div>
-    <div class="cc-luz cc-luz-amarilla" id="luz-amarilla"></div>
-    <div class="cc-luz cc-luz-verde" id="luz-verde"></div>
-  </div>
-  <p class="cc-semaforo-texto" id="semaforo-texto">Analizando producto...</p>
-</div>
+<!-- Toast -->
+<div class="cc-toast" id="toast">✅ ¡Comentario enviado!</div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="script.js"></script>
