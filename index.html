@@ -90,13 +90,13 @@
   <!-- MAPA -->
   <section class="cc-section">
     <p class="cc-sec-title">Encontrá lo que buscás</p>
-  <div class="cc-mapa-filtros"></div>
-      <button class="cc-mapa-filtro activo" data-cat="all" onclick="filtrarMapa(this, 'all')">Todos</button>
-      <button class="cc-mapa-filtro cc-filtro-celiaco" data-cat="celiaco" onclick="filtrarMapa(this, 'celiaco')">🌾 Celíaco</button>
-      <button class="cc-mapa-filtro cc-filtro-vegano" data-cat="vegano" onclick="filtrarMapa(this, 'vegano')">🌱 Vegano</button>
-      <button class="cc-mapa-filtro cc-filtro-vegetariano" data-cat="vegetariano" onclick="filtrarMapa(this, 'vegetariano')">🥗 Vegetariano</button>
-      <button class="cc-mapa-filtro cc-filtro-multiapto" data-cat="multiapto" onclick="filtrarMapa(this, 'multiapto')">⭐ Multiapto</button>
-    </div>
+  <div class="cc-mapa-filtros">
+  <button class="cc-mapa-filtro activo" data-cat="all" onclick="filtrarMapa(this, 'all')">Todos</button>
+  <button class="cc-mapa-filtro cc-filtro-celiaco" data-cat="celiaco" onclick="filtrarMapa(this, 'celiaco')">🌾 Celíaco</button>
+  <button class="cc-mapa-filtro cc-filtro-vegano" data-cat="vegano" onclick="filtrarMapa(this, 'vegano')">🌱 Vegano</button>
+  <button class="cc-mapa-filtro cc-filtro-vegetariano" data-cat="vegetariano" onclick="filtrarMapa(this, 'vegetariano')">🥗 Vegetariano</button>
+  <button class="cc-mapa-filtro cc-filtro-multiapto" data-cat="multiapto" onclick="filtrarMapa(this, 'multiapto')">⭐ Multiapto</button>
+</div>
   <div id="map" class="cc-mapa-leaflet"></div>
   </section>
 
@@ -113,6 +113,8 @@
       <button class="cc-submit" onclick="enviarFormulario()">Enviar →</button>
     </div>
   </section>
+
+</div>
 
   <!-- FOOTER -->
   <footer class="cc-footer">
