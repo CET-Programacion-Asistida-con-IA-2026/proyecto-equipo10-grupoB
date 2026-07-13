@@ -56,9 +56,9 @@ Y una explicación del motivo:
 ### 2. 📚 Sección educativa — ¿Qué significa?
 
 Para cada perfil alimentario se explica:
-- ❌ Qué alimentos evitar
-- 🏷️ Qué significan las etiquetas (Sin TACC, índice glucémico, etc.)
-- ✅ Qué alternativas seguras existen
+- curiosidades
+- Qué significa cada etiqueta (Sin TACC, Sin gluten.)
+- Contaminación cruzada
 
 ---
 
@@ -69,8 +69,7 @@ Mapa con restaurantes, cafeterías y locales identificados por colores:
 | Ícono | Color | Perfil |
 |-------|-------|--------|
 | 🟦 | Azul | Celíacos |
-| 🟩 | Verde | Diabéticos |
-| 🟨 | Amarillo | Veganos |
+| 🟩 | Verde | Veganos |
 | 🟧 | Naranja | Vegetarianos |
 | ⭐ | Morado | Multiaptos (para toda la familia) |
 
@@ -83,7 +82,7 @@ El diseño visual de CeliaCheck está inspirado en:
 - **Tipografía:** `Archivo Black` — bold, impactante, moderna (como el texto "semáforo" del moodboard)
 - **Sistema visual central:** 🚦 El semáforo — metáfora de apto / revisar / no apto
 - **Estética:** Inspirada en sitios como *Veganuary* y *DAP* — colorida, orgánica, fácil de leer
-- **Iconografía:** 🌾 🌽 🐄 🥑 — ingredientes naturales que comunican alimentación real
+- **Iconografía:** 🌾 🌽 🐄  — ingredientes naturales que comunican alimentación real
 
 ### Paleta de colores
 
